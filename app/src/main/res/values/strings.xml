@@ -9,4 +9,9 @@
     <string name="title_register_new_user">Cadastrar-se</string>
     <string name="hint_password">Entre com sua senha</string>
     <string name="hint_email">Entre com seu email</string>
+    <string name="title_name">Nome:</string>
+    <string name="hint_enter_name">Entre com seu nome completo</string>
+    <string name="title_re_password">Repetir sena:</string>
+    <string name="hint_re_password">Repita sua senha</string>
+    <string name="title_confirm">Confirmar</string>
 </resources>

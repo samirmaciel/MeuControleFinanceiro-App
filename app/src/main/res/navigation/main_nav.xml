@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/registerNewUserFragment">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.samirmaciel.meucontrolefinanceiro.view.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/registerNewUserFragment"
+        android:name="com.samirmaciel.meucontrolefinanceiro.view.registerNewUser.RegisterNewUserFragment"
+        android:label="fragment_register_new_user"
+        tools:layout="@layout/fragment_register_new_user" />
 </navigation>
