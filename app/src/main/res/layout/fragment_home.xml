@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".view.home.HomeFragment">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/home_profile_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/profile_place"/>
+
+    <TextView
+        android:id="@+id/home_profile_button"
+        app:layout_constraintStart_toEndOf="@id/home_profile_image"
+        app:layout_constraintTop_toTopOf="@id/home_profile_image"
+        app:layout_constraintBottom_toBottomOf="@id/home_profile_image"
+        android:text="@string/title_profile"
+        style="@style/title_regular" />
+
+    <TextView
+        android:id="@+id/home_current_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/title_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/home_profile_image"
+        app:layout_constraintBottom_toBottomOf="@id/home_profile_image"
+        android:layout_marginEnd="16dp"
+        android:text="Mês atual"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/home_current_month"
+        app:layout_constraintEnd_toEndOf="@id/home_current_month"
+        android:layout_marginTop="30dp"
+        android:id="@+id/home_users_values_recyclerView"
+        tools:listitem="@layout/item_users_values"
+        tools:itemCount="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/home_profile_image">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/home_transactions_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="5dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/transactions_button" />
+
+            <TextView
+                android:id="@+id/home_transations_title"
+                style="@style/title_medium"
+                android:text="@string/title_transactions"
+                android:textSize="10sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/home_credit_cards_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="5dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/credit_cards_button" />
+
+            <TextView
+                android:id="@+id/home_credit_cards_title"
+                style="@style/title_medium"
+                android:text="@string/title_credit_cards"
+                android:textColor="@color/whiteAlpha"
+                android:textSize="10sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/home_history_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="5dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/histoy_button" />
+
+            <TextView
+                android:id="@+id/home_history_title"
+                style="@style/title_medium"
+                android:text="@string/title_history"
+                android:textColor="@color/whiteAlpha"
+                android:textSize="10sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/home_container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat3"
+        app:navGraph="@navigation/home_nav" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,4 +18,8 @@
     <string name="title_id">ID:</string>
     <string name="hint_enter_with_control_id">Entre com o id do controle</string>
     <string name="title_create_new_control">Criar um novo controle</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_transactions">Transações</string>
+    <string name="title_credit_cards">Cartões</string>
+    <string name="title_history">Histórico</string>
 </resources>
