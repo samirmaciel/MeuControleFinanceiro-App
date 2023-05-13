@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/lobbyFragment">
+    app:startDestination="@id/profileFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -20,4 +20,14 @@
         android:name="com.samirmaciel.meucontrolefinanceiro.view.lobby.LobbyFragment"
         android:label="fragment_lobby"
         tools:layout="@layout/fragment_lobby" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.samirmaciel.meucontrolefinanceiro.view.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.samirmaciel.meucontrolefinanceiro.view.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

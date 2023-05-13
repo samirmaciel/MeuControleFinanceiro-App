@@ -27,4 +27,6 @@
     <string name="title_categories">Categorias</string>
     <string name="title_settings">Configurações</string>
     <string name="title_quit">Sair</string>
+    <string name="title_day_of_payment">Dia do salário:</string>
+    <string name="title_value_of_payment">Valor do salário:</string>
 </resources>
