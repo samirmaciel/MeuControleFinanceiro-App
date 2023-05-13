@@ -14,4 +14,8 @@
     <string name="title_re_password">Repetir sena:</string>
     <string name="hint_re_password">Repita sua senha</string>
     <string name="title_confirm">Confirmar</string>
+    <string name="title_choice_your_control">Escolha seu controle</string>
+    <string name="title_id">ID:</string>
+    <string name="hint_enter_with_control_id">Entre com o id do controle</string>
+    <string name="title_create_new_control">Criar um novo controle</string>
 </resources>
