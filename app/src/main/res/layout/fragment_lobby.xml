@@ -48,6 +48,7 @@
                 style="@style/title_medium"/>
 
             <EditText
+                android:id="@+id/lobby_id_input"
                 android:hint="@string/hint_enter_with_control_id"
                 android:maxLength="20"
                 style="@style/edit_default"/>
@@ -55,12 +56,14 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/lobby_enter_button"
             style="@style/button_default"
             android:text="@string/title_enter"
             android:layout_marginTop="18dp"
             app:cornerRadius="5dp"/>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/lobby_create_new_control_button"
             style="@style/button_default"
             android:text="@string/title_create_new_control"
             android:layout_marginTop="8dp"
