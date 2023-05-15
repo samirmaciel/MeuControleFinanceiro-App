@@ -29,4 +29,6 @@
     <string name="title_quit">Sair</string>
     <string name="title_day_of_payment">Dia do salário:</string>
     <string name="title_value_of_payment">Valor do salário:</string>
+    <string name="title_credit_card_limit_available">Limite disponível:</string>
+    <string name="title_credit_card_limit_total">Limite total:</string>
 </resources>
