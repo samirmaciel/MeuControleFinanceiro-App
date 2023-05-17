@@ -13,50 +13,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/item_credit_card_user_image"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/profile_place"/>
-
         <TextView
-            android:id="@+id/item_credit_card_title"
+            android:id="@+id/item_credit_card_to_edit_title"
             style="@style/title_medium"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@id/item_credit_card_user_image"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Cartão de Credito" />
 
         <TextView
-            android:id="@+id/item_credit_card_limit_available"
+            android:id="@+id/item_credit_card_to_edit_limit_available"
             style="@style/title_regular"
             android:layout_marginTop="8dp"
             android:text="@string/title_credit_card_limit_available"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@id/item_credit_card_title"
-            app:layout_constraintTop_toBottomOf="@id/item_credit_card_title" />
+            app:layout_constraintStart_toStartOf="@id/item_credit_card_to_edit_title"
+            app:layout_constraintTop_toBottomOf="@id/item_credit_card_to_edit_title" />
 
         <TextView
+            android:id="@+id/item_credit_card_to_edit_available_limit"
             style="@style/title_regular"
             android:layout_marginStart="5dp"
             android:textColor="@color/green"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/item_credit_card_limit_available"
-            app:layout_constraintStart_toEndOf="@+id/item_credit_card_limit_available"
-            app:layout_constraintTop_toTopOf="@+id/item_credit_card_limit_available"
+            app:layout_constraintBottom_toBottomOf="@+id/item_credit_card_to_edit_limit_available"
+            app:layout_constraintStart_toEndOf="@+id/item_credit_card_to_edit_limit_available"
+            app:layout_constraintTop_toTopOf="@+id/item_credit_card_to_edit_limit_available"
             app:layout_constraintVertical_bias="0.0"
             tools:text="R$ 349,00" />
 
         <TextView
-            android:id="@+id/item_credit_card_limit_total"
+            android:id="@+id/item_credit_card_to_edit_limit_total_title"
             style="@style/title_regular"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="8dp"
@@ -64,27 +55,28 @@
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/item_credit_card_title"
-            app:layout_constraintTop_toBottomOf="@id/item_credit_card_limit_available" />
+            app:layout_constraintStart_toStartOf="@id/item_credit_card_to_edit_title"
+            app:layout_constraintTop_toBottomOf="@id/item_credit_card_to_edit_limit_available" />
 
         <TextView
+            android:id="@+id/item_credit_card_to_edit_limit_total"
             style="@style/title_regular"
             android:layout_marginStart="5dp"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/item_credit_card_limit_total"
-            app:layout_constraintStart_toEndOf="@+id/item_credit_card_limit_total"
-            app:layout_constraintTop_toTopOf="@+id/item_credit_card_limit_total"
+            app:layout_constraintBottom_toBottomOf="@+id/item_credit_card_to_edit_limit_total_title"
+            app:layout_constraintStart_toEndOf="@+id/item_credit_card_to_edit_limit_total_title"
+            app:layout_constraintTop_toTopOf="@+id/item_credit_card_to_edit_limit_total_title"
             app:layout_constraintVertical_bias="0.0"
             tools:text="R$ 3.000,00" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterButton
-            android:id="@+id/item_credit_card_details"
+            android:id="@+id/item_credit_card_to_edit_delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/baseline_arrow_forward_ios_24"
+            android:src="@drawable/baseline_delete_outline_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
