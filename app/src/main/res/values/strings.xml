@@ -33,4 +33,6 @@
     <string name="title_credit_card_limit_total">Limite total:</string>
     <string name="title_filter">Filtrar</string>
     <string name="title_last_transactions">Ultimas transações</string>
+    <string name="title_next_invoice">Próxima fatura:</string>
+    <string name="title_cash_purchases">Compras parceladas</string>
 </resources>
