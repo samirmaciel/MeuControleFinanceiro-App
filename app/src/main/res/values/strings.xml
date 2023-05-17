@@ -31,4 +31,6 @@
     <string name="title_value_of_payment">Valor do salário:</string>
     <string name="title_credit_card_limit_available">Limite disponível:</string>
     <string name="title_credit_card_limit_total">Limite total:</string>
+    <string name="title_filter">Filtrar</string>
+    <string name="title_last_transactions">Ultimas transações</string>
 </resources>

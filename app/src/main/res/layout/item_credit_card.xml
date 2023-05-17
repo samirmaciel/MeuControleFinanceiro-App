@@ -13,6 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/item_credit_card_user_image"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/profile_place"/>
 
         <TextView
             android:id="@+id/item_credit_card_title"
@@ -21,7 +30,7 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_credit_card_user_image"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Cartão de Credito" />
 
