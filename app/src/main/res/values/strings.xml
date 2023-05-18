@@ -35,4 +35,11 @@
     <string name="title_last_transactions">Ultimas transações</string>
     <string name="title_next_invoice">Próxima fatura:</string>
     <string name="title_cash_purchases">Compras parceladas</string>
+    <string name="title_description">Descrição:</string>
+    <string name="hint_description">Descrição</string>
+    <string name="title_payment_type">Tipo de pagamento:</string>
+    <string name="title_category">Categoria:</string>
+    <string name="title_card">Cartão:</string>
+    <string name="title_value">Valor:</string>
+    <string name="hint_money_value">R$00,0</string>
 </resources>
