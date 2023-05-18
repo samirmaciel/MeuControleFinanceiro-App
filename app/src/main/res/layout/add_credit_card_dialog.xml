@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardBackgroundColor="#F5F5F5"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="0dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_margin="8dp"
+                    style="@style/title_medium"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:text="@string/title_name"/>
+
+                <EditText
+                    android:id="@+id/addCreditCard_name_input"
+                    android:layout_marginEnd="8dp"
+                    android:hint="@string/hint_insert_name_credit_card"
+                    style="@style/edit_default"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_margin="8dp"
+                    style="@style/title_medium"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:text="@string/title_credit_card_limit_total"/>
+
+                <EditText
+                    android:id="@+id/addCreditCard_limit_total_value_input"
+                    android:layout_marginEnd="8dp"
+                    android:layout_width="wrap_content"
+                    android:hint="@string/hint_money_value"
+                    style="@style/edit_default"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_margin="8dp"
+                    style="@style/title_medium"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:text="@string/title_credit_card_limit_available"/>
+
+                <EditText
+                    android:id="@+id/addCreditCard_limit_available_value_input"
+                    android:layout_marginEnd="8dp"
+                    android:layout_width="wrap_content"
+                    android:hint="@string/hint_money_value"
+                    style="@style/edit_default"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_margin="8dp"
+                    style="@style/title_medium"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:text="@string/title_payments_cash_purchases"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_margin="8dp"
+                        style="@style/title_medium"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:text="@string/title_description"/>
+
+                    <EditText
+                        android:id="@+id/addCreditCard_cashPurchases_description_input"
+                        android:layout_marginEnd="8dp"
+                        android:hint="@string/hint_description"
+                        style="@style/edit_default"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_margin="8dp"
+                        style="@style/title_medium"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:text="@string/title_value_of_cash_purchases"/>
+
+                    <EditText
+                        android:id="@+id/addCreditCard_cashPurchases_value_input"
+                        android:layout_marginEnd="8dp"
+                        android:layout_width="wrap_content"
+                        android:hint="@string/hint_money_value"
+                        style="@style/edit_default"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_margin="8dp"
+                        style="@style/title_medium"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:text="@string/title_total_cash_purchases"/>
+
+                    <Spinner
+                        android:id="@+id/addCreditCard_total_cashPurchases_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_margin="8dp"
+                        style="@style/title_medium"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:text="@string/title_total_cash_purchases_payed"/>
+
+                    <Spinner
+                        android:id="@+id/addCreditCard_cashPurchases_payed_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/addCreditCard_add_cashPurchases_button"
+                    android:layout_margin="10dp"
+                    android:layout_height="35dp"
+                    android:layout_width="wrap_content"
+                    app:cornerRadius="5dp"
+                    android:text="@string/title_add"
+                    style="@style/button_default" />
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/addCreditCard_cashPurchases_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            tools:listitem="@layout/item_cash_purchases"
+            tools:itemCount="2"
+            android:layout_marginHorizontal="10dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addCreditCard_confirm_button"
+            android:layout_margin="10dp"
+            app:cornerRadius="5dp"
+            android:text="@string/title_confirm"
+            style="@style/button_default" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

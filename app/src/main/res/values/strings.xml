@@ -42,4 +42,10 @@
     <string name="title_card">Cartão:</string>
     <string name="title_value">Valor:</string>
     <string name="hint_money_value">R$00,0</string>
+    <string name="hint_insert_name_credit_card">Insira um nome para seu cartão</string>
+    <string name="title_value_of_cash_purchases">Valor da parcela:</string>
+    <string name="title_total_cash_purchases">Total de parcelas:</string>
+    <string name="title_total_cash_purchases_payed">Total de parcelas pagas:</string>
+    <string name="title_add">Adicionar</string>
+    <string name="title_payments_cash_purchases">Compras parceladas</string>
 </resources>
