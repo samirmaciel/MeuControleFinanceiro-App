@@ -2,7 +2,7 @@
     <string name="app_name">MeuControleFinanceiro</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_app_name">Meu controle Financeiro</string>
+    <string name="title_app_name">Nosso controle Financeiro</string>
     <string name="title_email">Email:</string>
     <string name="title_password">Senha:</string>
     <string name="title_enter">Entrar</string>

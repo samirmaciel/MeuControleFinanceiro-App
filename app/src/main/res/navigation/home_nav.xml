@@ -3,11 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav"
-    app:startDestination="@id/transactionsFragment">
+    app:startDestination="@id/historyFragment">
 
     <fragment
         android:id="@+id/transactionsFragment"
         android:name="com.samirmaciel.meucontrolefinanceiro.view.transactions.TransactionsFragment"
         android:label="fragment_transactions"
-        tools:layout="@layout/fragment_transactions" />
+        tools:layout="@layout/fragment_transactions" >
+        <action
+            android:id="@+id/action_transactionsFragment_to_creditCardsFragment"
+            app:destination="@id/creditCardsFragment" />
+        <action
+            android:id="@+id/action_transactionsFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/creditCardsFragment"
+        android:name="com.samirmaciel.meucontrolefinanceiro.view.creditCards.CreditCardsFragment"
+        android:label="fragment_credit_cards"
+        tools:layout="@layout/fragment_credit_cards" >
+        <action
+            android:id="@+id/action_creditCardsFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_creditCardsFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.samirmaciel.meucontrolefinanceiro.view.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_creditCardsFragment"
+            app:destination="@id/creditCardsFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment" />
+    </fragment>
 </navigation>
