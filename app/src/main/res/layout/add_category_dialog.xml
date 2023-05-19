@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="0dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/title_medium"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:text="@string/title_name"/>
+
+            <EditText
+                android:id="@+id/addCategory_name_input"
+                style="@style/edit_default"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:hint="@string/hint_name_category"/>
+
+        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addCategory_confirm_button"
+            android:layout_margin="10dp"
+            app:cornerRadius="5dp"
+            android:text="@string/title_confirm"
+            style="@style/button_default" />
+
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
