@@ -11,7 +11,7 @@
     <string name="hint_email">Entre com seu email</string>
     <string name="title_name">Nome:</string>
     <string name="hint_enter_name">Entre com seu nome completo</string>
-    <string name="title_re_password">Repetir sena:</string>
+    <string name="title_re_password">Repetir senha:</string>
     <string name="hint_re_password">Repita sua senha</string>
     <string name="title_confirm">Confirmar</string>
     <string name="title_choice_your_control">Escolha seu controle</string>
@@ -49,4 +49,10 @@
     <string name="title_add">Adicionar</string>
     <string name="title_payments_cash_purchases">Compras parceladas</string>
     <string name="hint_name_category">Nome da categoria</string>
+    <string name="alert_message_username">Você precisa preencher o campo nome</string>
+    <string name="alert_message_email">Você precisa preencher com um email valido</string>
+    <string name="alert_message_password">Sua senha precisa ter mais que 8 caracteres</string>
+    <string name="alert_message_repassword">As suas senhas precisão ser iguais</string>
+    <string name="alert_message_imageupload">Você precisa carregar uma imagem de perfil</string>
+
 </resources>

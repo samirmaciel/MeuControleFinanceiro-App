@@ -19,10 +19,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/registerNewUser_image_upload_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:clickable="true"
         android:layout_marginTop="120dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:src="@drawable/image_upload"
@@ -58,6 +59,7 @@
             <EditText
                 android:id="@+id/registerNewUser_name_input"
                 style="@style/edit_default"
+                android:maxLength="25"
                 android:hint="@string/hint_enter_name"
                 android:inputType="text" />
 
@@ -128,10 +130,20 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+    <TextView
+        android:id="@+id/registerNewUser_alert_message"
+        app:layout_constraintBottom_toTopOf="@id/registerNewUser_confirm_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/red"
+        style="@style/title_medium"
+        tools:text="Seu email não está correto"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/registerNewUser_confirm_button"
         style="@style/button_default"
         app:cornerRadius="5dp"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
