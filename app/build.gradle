@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.samirmaciel.meucontrolefinanceiro'
+    namespace 'com.samirmaciel.nossocontrolefinanceiro'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.samirmaciel.meucontrolefinanceiro"
+        applicationId "com.samirmaciel.nossocontrolefinanceiro"
         minSdk 24
         targetSdk 33
         versionCode 1

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.samirmaciel.meucontrolefinanceiro.view.login.LoginFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerNewUserFragment"
-        android:name="com.samirmaciel.meucontrolefinanceiro.view.registerNewUser.RegisterNewUserFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.registerNewUser.RegisterNewUserFragment"
         android:label="fragment_register_new_user"
         tools:layout="@layout/fragment_register_new_user" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/lobbyFragment"
-        android:name="com.samirmaciel.meucontrolefinanceiro.view.lobby.LobbyFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.lobby.LobbyFragment"
         android:label="fragment_lobby"
         tools:layout="@layout/fragment_lobby" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.samirmaciel.meucontrolefinanceiro.view.home.HomeFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.samirmaciel.meucontrolefinanceiro.view.profile.ProfileFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -67,22 +67,22 @@
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="com.samirmaciel.meucontrolefinanceiro.view.categories.CategoriesFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.categories.CategoriesFragment"
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" />
     <fragment
         android:id="@+id/myTransactionsFragment"
-        android:name="com.samirmaciel.meucontrolefinanceiro.view.myTransactions.MyTransactionsFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.myTransactions.MyTransactionsFragment"
         android:label="fragment_my_transactions"
         tools:layout="@layout/fragment_my_transactions" />
     <fragment
         android:id="@+id/myCreditCardsFragment"
-        android:name="com.samirmaciel.meucontrolefinanceiro.view.myCreditCards.MyCreditCardsFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.myCreditCards.MyCreditCardsFragment"
         android:label="fragment_my_credit_cards"
         tools:layout="@layout/fragment_my_credit_cards" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.samirmaciel.meucontrolefinanceiro.view.settings.SettingsFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

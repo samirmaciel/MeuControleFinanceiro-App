@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/transactionsFragment"
-        android:name="com.samirmaciel.meucontrolefinanceiro.view.transactions.TransactionsFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.transactions.TransactionsFragment"
         android:label="fragment_transactions"
         tools:layout="@layout/fragment_transactions" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/creditCardsFragment"
-        android:name="com.samirmaciel.meucontrolefinanceiro.view.creditCards.CreditCardsFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.creditCards.CreditCardsFragment"
         android:label="fragment_credit_cards"
         tools:layout="@layout/fragment_credit_cards" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.samirmaciel.meucontrolefinanceiro.view.history.HistoryFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" >
         <action
