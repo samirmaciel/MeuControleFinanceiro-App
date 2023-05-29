@@ -3,7 +3,8 @@ package com.samirmaciel.nossocontrolefinanceiro.view.login
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.fragment.app.viewModels
+import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.nossocontrolefinanceiro.R
@@ -21,6 +22,41 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         bindView(view)
         setListeners()
         setViewModel()
+        setObservers()
+        checkLogin()
+    }
+
+    private fun checkLogin() {
+        isLoading(true)
+        mViewModel?.checkLogin {
+            if(it.first){
+                mViewModel?.checkUserControl {
+                    if(it.first){
+                        isLoading(false)
+                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    }else{
+                        isLoading(false)
+                        findNavController().navigate(R.id.action_loginFragment_to_lobbyFragment)
+                    }
+                }
+            }else{
+                isLoading(false)
+            }
+        }
+    }
+
+    private fun setObservers() {
+        mViewModel?.emailInput?.observe(viewLifecycleOwner){
+            setEnterButtonVisibility(mViewModel?.validateInputs())
+        }
+
+        mViewModel?.passwordInput?.observe(viewLifecycleOwner){
+            setEnterButtonVisibility(mViewModel?.validateInputs())
+        }
+    }
+
+    private fun setEnterButtonVisibility(validateInputs: Boolean?) {
+        binding?.loginEnterButton?.isEnabled = validateInputs == true
     }
 
     private fun setViewModel() {
@@ -28,12 +64,39 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun setListeners() {
+
+        binding?.loginEmailInput?.doOnTextChanged { text, start, before, count -> mViewModel?.emailInput?.value = text.toString()  }
+        binding?.loginPasswordInput?.doOnTextChanged { text, start, before, count -> mViewModel?.passwordInput?.value = text.toString()  }
+
         binding?.loginEnterButton?.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_lobbyFragment)
+            isLoading(true)
+            mViewModel?.makeLogin{
+                if(it.first){
+                    isLoading(false)
+                    findNavController().navigate(R.id.action_loginFragment_to_lobbyFragment)
+                }else{
+                    isLoading(false)
+                    Toast.makeText(requireContext(), it.second, Toast.LENGTH_LONG).show()
+                }
+            }
+
         }
         binding?.loginRegisterButton?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerNewUserFragment)
         }
+    }
+
+    private fun isLoading(isLoading: Boolean) {
+        if(isLoading){
+            binding?.loginProgressbar?.visibility = View.VISIBLE
+            binding?.loginEnterButton?.visibility = View.GONE
+            binding?.loginRegisterButton?.visibility = View.GONE
+        }else{
+            binding?.loginProgressbar?.visibility = View.GONE
+            binding?.loginEnterButton?.visibility = View.VISIBLE
+            binding?.loginRegisterButton?.visibility = View.VISIBLE
+        }
+
     }
 
     private fun bindView(view: View) {

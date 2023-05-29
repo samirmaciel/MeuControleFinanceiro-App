@@ -78,8 +78,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="vertical">
 
+        <ProgressBar
+            android:id="@+id/login_progressbar"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:indeterminateTint="@color/lightBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/login_enter_button"
+            android:enabled="false"
             app:cornerRadius="5dp"
             android:text="@string/title_enter"
             style="@style/button_default" />

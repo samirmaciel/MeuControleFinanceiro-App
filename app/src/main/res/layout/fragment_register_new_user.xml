@@ -130,25 +130,39 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <TextView
-        android:id="@+id/registerNewUser_alert_message"
-        app:layout_constraintBottom_toTopOf="@id/registerNewUser_confirm_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/red"
-        style="@style/title_medium"
-        tools:text="Seu email não está correto"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/registerNewUser_confirm_button"
-        style="@style/button_default"
-        app:cornerRadius="5dp"
-        android:enabled="false"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/title_confirm"/>
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/register_progressBar"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/lightBlue"/>
+
+        <TextView
+            android:id="@+id/registerNewUser_alert_message"
+            android:textColor="@color/red"
+            style="@style/title_medium"
+            tools:text="Seu email não está correto"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/registerNewUser_confirm_button"
+            style="@style/button_default"
+            app:cornerRadius="5dp"
+            android:enabled="false"
+            android:text="@string/title_confirm"/>
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

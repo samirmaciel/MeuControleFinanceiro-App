@@ -8,6 +8,7 @@
     tools:context=".view.lobby.LobbyFragment">
 
     <ImageButton
+        android:id="@+id/lobby_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,21 +19,22 @@
         android:src="@drawable/baseline_arrow_back_white_24"/>
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="148dp"
         android:orientation="vertical"
-        android:layout_marginTop="150dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="40dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            style="@style/title_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/title_medium"
-            android:textSize="50sp"
-            android:text="@string/title_choice_your_control"/>
+            android:text="@string/title_choice_your_control"
+            android:textSize="50sp" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -41,36 +43,44 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/title_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_id"
                 android:layout_marginEnd="16dp"
-                style="@style/title_medium"/>
+                android:text="@string/title_id" />
 
             <EditText
                 android:id="@+id/lobby_id_input"
+                style="@style/edit_default"
                 android:hint="@string/hint_enter_with_control_id"
-                android:maxLength="20"
-                style="@style/edit_default"/>
+                android:maxLength="20" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/lobby_enter_button"
             style="@style/button_default"
-            android:text="@string/title_enter"
+            android:enabled="false"
             android:layout_marginTop="18dp"
-            app:cornerRadius="5dp"/>
+            android:text="@string/title_enter"
+            app:cornerRadius="5dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/lobby_create_new_control_button"
             style="@style/button_default"
-            android:text="@string/title_create_new_control"
             android:layout_marginTop="8dp"
-            app:cornerRadius="5dp"/>
+            android:text="@string/title_create_new_control"
+            app:cornerRadius="5dp" />
 
+        <ProgressBar
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:id="@+id/lobby_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:indeterminateTint="@color/lightBlue"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

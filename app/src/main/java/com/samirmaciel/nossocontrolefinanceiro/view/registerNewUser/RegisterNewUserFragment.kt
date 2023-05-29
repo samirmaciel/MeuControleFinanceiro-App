@@ -66,9 +66,31 @@ class RegisterNewUserFragment : Fragment(R.layout.fragment_register_new_user) {
         mViewModel = ViewModelProvider(this)[RegisterNewUserViewModel::class.java]
     }
 
+    private fun isLoading(isloading: Boolean){
+        if(isloading){
+            binding?.registerProgressBar?.visibility = View.VISIBLE
+            binding?.registerNewUserConfirmButton?.visibility = View.GONE
+            binding?.registerNewUserAlertMessage?.visibility = View.GONE
+        }else{
+            binding?.registerProgressBar?.visibility = View.GONE
+            binding?.registerNewUserConfirmButton?.visibility = View.VISIBLE
+            binding?.registerNewUserAlertMessage?.visibility = View.VISIBLE
+        }
+    }
+
     private fun setListeners() {
         binding?.registerNewUserConfirmButton?.setOnClickListener {
-            findNavController().navigate(R.id.action_registerNewUserFragment_to_lobbyFragment)
+            isLoading(true)
+            mViewModel?.createNewUser {
+                if(it.first){
+                    isLoading(false)
+                    findNavController().navigate(R.id.action_registerNewUserFragment_to_lobbyFragment)
+                }else{
+                    isLoading(false)
+                    Toast.makeText(requireContext(), it.second, Toast.LENGTH_LONG).show()
+                }
+            }
+
         }
 
         binding?.registerNewUserEmailInput?.doOnTextChanged { text, start, before, count ->
