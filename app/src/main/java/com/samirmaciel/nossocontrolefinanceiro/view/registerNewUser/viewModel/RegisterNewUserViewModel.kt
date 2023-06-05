@@ -9,7 +9,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.samirmaciel.nossocontrolefinanceiro.R
-import com.samirmaciel.nossocontrolefinanceiro.model.User
+import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
+import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
 
 class RegisterNewUserViewModel : ViewModel() {
 
@@ -61,7 +62,7 @@ class RegisterNewUserViewModel : ViewModel() {
 
     private fun uploadUserImage(userID: String, onFinish: (String?) -> Unit) {
         val storageRef = mStore.reference
-        val imageRef = storageRef.child("USERSIMAGES")
+        val imageRef = storageRef.child(CollectionsNames.USERSIMAGES)
         val fileRef = imageRef.child(userID)
 
         val uploadTask = fileRef.putFile(userImageUpload.value!!)
@@ -88,7 +89,7 @@ class RegisterNewUserViewModel : ViewModel() {
 
 
     private fun registerUserProfile(user: User, onFinish: (Pair<Boolean, String?>) -> Unit) {
-        mFireStore.collection("USERS").document(user.id.toString()).set(user)
+        mFireStore.collection(CollectionsNames.USERS).document(user.id.toString()).set(user)
             .addOnCompleteListener {
 
                 it.addOnSuccessListener {

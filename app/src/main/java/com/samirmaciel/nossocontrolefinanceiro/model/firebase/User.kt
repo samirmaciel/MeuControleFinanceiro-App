@@ -1,4 +1,4 @@
-package com.samirmaciel.nossocontrolefinanceiro.model
+package com.samirmaciel.nossocontrolefinanceiro.model.firebase
 
 data class User(
 

@@ -4,8 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.samirmaciel.nossocontrolefinanceiro.model.Control
-import com.samirmaciel.nossocontrolefinanceiro.model.User
+import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
+import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
+import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
 import java.util.Date
 
 class LobbyViewModel : ViewModel() {
@@ -37,7 +38,7 @@ class LobbyViewModel : ViewModel() {
 
         if (currentUser.value != null) {
             val currentUser = currentUser.value
-            val controlID = "${currentUser!!.id?.take(10)}${currentUser.name}"
+            val controlID = "${currentUser!!.id?.take(10)}"
             val membersList = mutableListOf<User>()
             membersList.add(currentUser!!)
 
@@ -49,7 +50,7 @@ class LobbyViewModel : ViewModel() {
                 createdBy = currentUser
             )
 
-            mFireStore.collection("CONTROLS").document(newControl.id!!).set(newControl)
+            mFireStore.collection(CollectionsNames.CONTROLS).document(newControl.id!!).set(newControl)
                 .addOnCompleteListener {
                     it.addOnSuccessListener {
                         currentUser.currentControlId = newControl.id
@@ -66,7 +67,7 @@ class LobbyViewModel : ViewModel() {
     }
 
     private fun updateCurrentUser(user: User){
-        mFireStore.collection("USERS").document(user.id!!).set(user).addOnCompleteListener {
+        mFireStore.collection(CollectionsNames.USERS).document(user.id!!).set(user).addOnCompleteListener {
             it.addOnSuccessListener {
 
             }
@@ -81,7 +82,7 @@ class LobbyViewModel : ViewModel() {
         val fireBaseUser = mAuth.currentUser
 
         if (fireBaseUser != null) {
-            mFireStore.collection("USERS").document(fireBaseUser.uid).get().addOnCompleteListener {
+            mFireStore.collection(CollectionsNames.USERS).document(fireBaseUser.uid).get().addOnCompleteListener {
 
                 it.addOnSuccessListener { document ->
                     if (document.exists()) {

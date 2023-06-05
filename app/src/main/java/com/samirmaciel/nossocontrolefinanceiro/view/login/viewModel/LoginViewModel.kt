@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.ktx.app
-import com.google.firebase.storage.FirebaseStorage
-import com.samirmaciel.nossocontrolefinanceiro.model.User
+import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
 
 class LoginViewModel : ViewModel() {
 
