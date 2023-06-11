@@ -39,7 +39,6 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
 
         mViewModel?.transactions?.observe(viewLifecycleOwner){
             it?.let {list ->
-                Log.d("TESTEFILTER", "setObserver: ")
                 setupTransactionAdapter(list)
             }
 

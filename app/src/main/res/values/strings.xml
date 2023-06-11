@@ -15,7 +15,7 @@
     <string name="hint_re_password">Repita sua senha</string>
     <string name="title_confirm">Confirmar</string>
     <string name="title_choice_your_control">Escolha seu controle</string>
-    <string name="title_id">ID:</string>
+    <string name="title_id">ID do controle:</string>
     <string name="hint_enter_with_control_id">Entre com o id do controle</string>
     <string name="title_create_new_control">Criar um novo controle</string>
     <string name="title_profile">Perfil</string>
@@ -54,5 +54,6 @@
     <string name="alert_message_password">Sua senha precisa ter mais que 8 caracteres</string>
     <string name="alert_message_repassword">As suas senhas precisão ser iguais</string>
     <string name="alert_message_imageupload">Você precisa carregar uma imagem de perfil</string>
+    <string name="hint_category_name">Nome da categoria</string>
 
 </resources>

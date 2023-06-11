@@ -130,7 +130,6 @@ class RegisterNewUserFragment : Fragment(R.layout.fragment_register_new_user) {
                 Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
             }
         }
-
     }
 
     private fun setConfirmButtonState(isEnable: Boolean?){
