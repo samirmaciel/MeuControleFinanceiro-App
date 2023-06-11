@@ -32,18 +32,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myTransactions_recyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/myTransactions_title"
-        tools:itemCount="4"
-        tools:listitem="@layout/item_transaction_edit" />
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/myTransactions_text_to_list_empty"
+            style="@style/title_medium"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            android:text="@string/title_control_without_transactions"/>
+
+        <ProgressBar
+            android:id="@+id/mytransactions_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/darkBlue"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myTransactions_recyclerView"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_transaction_edit" />
+
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

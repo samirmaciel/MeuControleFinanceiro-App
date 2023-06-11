@@ -55,5 +55,6 @@
     <string name="alert_message_repassword">As suas senhas precisão ser iguais</string>
     <string name="alert_message_imageupload">Você precisa carregar uma imagem de perfil</string>
     <string name="hint_category_name">Nome da categoria</string>
+    <string name="title_control_without_transactions">Seu controle não possui nenhuma transação!</string>
 
 </resources>
