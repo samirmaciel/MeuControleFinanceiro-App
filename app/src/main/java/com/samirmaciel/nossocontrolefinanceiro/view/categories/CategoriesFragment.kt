@@ -24,15 +24,19 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
         super.onViewCreated(view, savedInstanceState)
 
         bindView(view)
-        loadState(LoadState.ON_LOAD)
         setupViewModel()
         setListeners()
         setObserver()
     }
 
     private fun setObserver() {
-        viewModel?.categoryList?.observe(viewLifecycleOwner){
-            it?.let {list ->
+        viewModel?.categoryList?.observe(viewLifecycleOwner){list ->
+
+            if(list.isNullOrEmpty()){
+                loadState(LoadState.ON_FINISH)
+                setEmptyListMessageVisibility(true)
+            }else{
+                setEmptyListMessageVisibility(false)
                 setupAdapter(list)
             }
         }
@@ -41,6 +45,17 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
             Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
         }
 
+    }
+
+    private fun setEmptyListMessageVisibility(isVisible: Boolean) {
+        if(isVisible){
+            binding?.categoriesEmptyListText?.visibility = View.VISIBLE
+            binding?.categoriesProgressbar?.visibility = View.GONE
+            binding?.categoryRecyclerView?.visibility = View.GONE
+        }else{
+            binding?.categoriesEmptyListText?.visibility = View.GONE
+            binding?.categoryRecyclerView?.visibility = View.VISIBLE
+        }
     }
 
     private fun setupAdapter(list: MutableList<String>) {

@@ -1,6 +1,6 @@
 package com.samirmaciel.nossocontrolefinanceiro.model.firebase
 
-data class InstallmentPayment(
+data class InstallmentPurchase(
 
     var id: String? = null,
     var description: String? = null,

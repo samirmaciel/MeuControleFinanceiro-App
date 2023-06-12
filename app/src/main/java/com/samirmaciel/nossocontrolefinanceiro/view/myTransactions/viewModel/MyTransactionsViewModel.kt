@@ -17,7 +17,7 @@ class MyTransactionsViewModel: ViewModel() {
     private val fireStore : FirebaseFirestore = FirebaseFirestore.getInstance()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    val transactionsList: MutableLiveData<MutableList<Transaction>?> = MutableLiveData(null)
+    val transactionsList: MutableLiveData<MutableList<Transaction>?> = MutableLiveData()
 
     init {
         loadCurrentUser()
@@ -46,14 +46,12 @@ class MyTransactionsViewModel: ViewModel() {
     }
 
     private fun loadCurrentControl(user: User) {
-        Log.d("FOIFOI", "loadCurrentControl: ")
         user.currentControlId?.let {currentControlID ->
             fireStore.collection(CollectionsNames.CONTROLS).document(currentControlID).get().addOnCompleteListener {
                 it.addOnSuccessListener {
                     val control = it.toObject(Control::class.java)
 
                     control?.let {
-                        Log.d("FOIFOI", "loadCurrentControl: " + it.transactions?.size)
                         currentControl.value = it
                         transactionsList.value = it.transactions
 

@@ -56,5 +56,7 @@
     <string name="alert_message_imageupload">Você precisa carregar uma imagem de perfil</string>
     <string name="hint_category_name">Nome da categoria</string>
     <string name="title_control_without_transactions">Seu controle não possui nenhuma transação!</string>
+    <string name="title_categories_empty">Seu controle não possui nenhuma categoria!</string>
+    <string name="title_credit_cards_list_empty">Seu controle não possui nenhum cartão de credito!</string>
 
 </resources>

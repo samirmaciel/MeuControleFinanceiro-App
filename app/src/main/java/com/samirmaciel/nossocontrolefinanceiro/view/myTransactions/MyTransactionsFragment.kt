@@ -30,13 +30,25 @@ class MyTransactionsFragment : Fragment(R.layout.fragment_my_transactions) {
 
     private fun setObservers() {
         viewModel?.transactionsList?.observe(viewLifecycleOwner) { list ->
-            Log.d("FOIFOI", "setObservers: " + list?.size )
             if(list.isNullOrEmpty()){
-                loadState(LoadState.ON_EMPTY)
+                loadState(LoadState.ON_FINISH)
+                setEmptyListMessageVisibility(true)
             }else{
+                setEmptyListMessageVisibility(false)
                 setupAdapter(list)
             }
 
+        }
+    }
+
+    private fun setEmptyListMessageVisibility(isVisible: Boolean) {
+        if(isVisible){
+            binding?.myTransactionsTextToListEmpty?.visibility = View.VISIBLE
+            binding?.myTransactionsRecyclerView?.visibility = View.GONE
+            binding?.mytransactionsProgressbar?.visibility = View.GONE
+        }else{
+            binding?.myTransactionsTextToListEmpty?.visibility = View.GONE
+            binding?.myTransactionsRecyclerView?.visibility = View.VISIBLE
         }
     }
 
@@ -66,14 +78,6 @@ class MyTransactionsFragment : Fragment(R.layout.fragment_my_transactions) {
                 binding?.mytransactionsProgressbar?.visibility = View.GONE
                 binding?.myTransactionsTextToListEmpty?.visibility = View.GONE
             }
-
-            LoadState.ON_EMPTY ->{
-                binding?.myTransactionsTextToListEmpty?.visibility = View.VISIBLE
-                binding?.myTransactionsRecyclerView?.visibility = View.GONE
-                binding?.mytransactionsProgressbar?.visibility = View.GONE
-            }
-
-            else -> {}
         }
     }
 

@@ -45,6 +45,7 @@
             app:layout_constraintTop_toBottomOf="@id/item_credit_card_title" />
 
         <TextView
+            android:id="@+id/item_credit_card_limit_available_value"
             style="@style/title_regular"
             android:layout_marginStart="5dp"
             android:textColor="@color/green"
@@ -68,6 +69,7 @@
             app:layout_constraintTop_toBottomOf="@id/item_credit_card_limit_available" />
 
         <TextView
+            android:id="@+id/item_credit_cards_limit_total_value"
             style="@style/title_regular"
             android:layout_marginStart="5dp"
             android:textColor="@color/black"
@@ -79,7 +81,7 @@
             tools:text="R$ 3.000,00" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterButton
-            android:id="@+id/item_credit_card_details"
+            android:id="@+id/item_credit_card_details_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"

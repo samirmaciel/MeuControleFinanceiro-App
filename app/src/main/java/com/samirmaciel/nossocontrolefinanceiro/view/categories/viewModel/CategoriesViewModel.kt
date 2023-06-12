@@ -85,7 +85,6 @@ class CategoriesViewModel: ViewModel() {
                         currentControl.value = control
                         categoryList.value = control.categories
                     }
-
                 }
 
                 it.addOnFailureListener {

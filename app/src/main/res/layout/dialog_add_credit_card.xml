@@ -16,7 +16,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="0dp"
             app:cardBackgroundColor="@color/white">
@@ -46,7 +48,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="0dp"
             app:cardBackgroundColor="@color/white">
@@ -77,7 +81,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="0dp"
             app:cardBackgroundColor="@color/white">
@@ -108,7 +114,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="0dp"
             app:cardBackgroundColor="@color/white">
@@ -181,10 +189,13 @@
                         android:textColor="@color/black"
                         android:text="@string/title_total_cash_purchases"/>
 
-                    <Spinner
-                        android:id="@+id/addCreditCard_total_cashPurchases_spinner"
+                    <EditText
+                        android:id="@+id/addCreditCard_cashPurchases_total_quantity_input"
+                        android:layout_marginEnd="8dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:inputType="number"
+                        android:hint="0"
+                        style="@style/edit_default"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -200,10 +211,13 @@
                         android:textColor="@color/black"
                         android:text="@string/title_total_cash_purchases_payed"/>
 
-                    <Spinner
-                        android:id="@+id/addCreditCard_cashPurchases_payed_spinner"
+                    <EditText
+                        android:id="@+id/addCreditCard_cashPurchases_payed_input"
+                        android:layout_marginEnd="8dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:inputType="number"
+                        android:hint="0"
+                        style="@style/edit_default"/>
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
