@@ -3,7 +3,6 @@ package com.samirmaciel.nossocontrolefinanceiro.view.myCreditCards
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +11,7 @@ import com.samirmaciel.nossocontrolefinanceiro.databinding.FragmentMyCreditCards
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.CreditCard
 import com.samirmaciel.nossocontrolefinanceiro.util.LoadState
 import com.samirmaciel.nossocontrolefinanceiro.view.creditCards.AddCreditCard.AddCreditCardDialog
-import com.samirmaciel.nossocontrolefinanceiro.view.myCreditCards.adapter.MyCreditCardsAdapter
+import com.samirmaciel.nossocontrolefinanceiro.view.creditCards.adapter.CreditCardsAdapter
 import com.samirmaciel.nossocontrolefinanceiro.view.myCreditCards.viewModel.MyCreditCardsViewModel
 
 class MyCreditCardsFragment : Fragment(R.layout.fragment_my_credit_cards) {
@@ -42,7 +41,7 @@ class MyCreditCardsFragment : Fragment(R.layout.fragment_my_credit_cards) {
     }
 
     private fun setupAdapter(list: MutableList<CreditCard>) {
-        val creditCardsAdapter  = MyCreditCardsAdapter()
+        val creditCardsAdapter  = CreditCardsAdapter()
 
         binding?.myCreditCardsRecyclerView?.apply {
             adapter  = creditCardsAdapter
@@ -90,7 +89,7 @@ class MyCreditCardsFragment : Fragment(R.layout.fragment_my_credit_cards) {
         }
 
         binding?.myCreditCardsAddButton?.setOnClickListener {
-            AddCreditCardDialog(viewModel?.currentUser?.value) {
+            AddCreditCardDialog(this, viewModel?.currentUser?.value) {
                 loadState(LoadState.ON_LOAD)
                 viewModel?.addCreditCard(it)
             }.show(childFragmentManager, "Add Credit Card Dialog Fragment")

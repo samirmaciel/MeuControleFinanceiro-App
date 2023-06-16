@@ -1,6 +1,7 @@
 package com.samirmaciel.nossocontrolefinanceiro.view.lobby
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.samirmaciel.nossocontrolefinanceiro.R
 import com.samirmaciel.nossocontrolefinanceiro.databinding.FragmentLobbyBinding
 import com.samirmaciel.nossocontrolefinanceiro.view.lobby.viewModel.LobbyViewModel
@@ -41,13 +43,9 @@ class LobbyFragment : Fragment(R.layout.fragment_lobby) {
             binding?.lobbyEnterButton?.visibility = View.VISIBLE
             binding?.lobbyCreateNewControlButton?.visibility = View.VISIBLE
         }
-
     }
 
     private fun setObservers() {
-        mViewModel?.controlIDInput?.observe(viewLifecycleOwner){
-            setEnterButtonEnabled(mViewModel?.validateInputs())
-        }
 
         mViewModel?.currentUser?.observe(viewLifecycleOwner){
             if(it != null){
@@ -55,21 +53,25 @@ class LobbyFragment : Fragment(R.layout.fragment_lobby) {
             }
         }
     }
-
-    private fun setEnterButtonEnabled(validateInputs: Boolean?) {
-        binding?.lobbyEnterButton?.isEnabled = validateInputs == true
-    }
-
     private fun setViewModel() {
         mViewModel = ViewModelProvider(this)[LobbyViewModel::class.java]
     }
 
     private fun setListeners() {
 
-        binding?.lobbyIdInput?.doOnTextChanged { text, start, before, count ->  mViewModel?.controlIDInput?.value = text.toString() }
-
         binding?.lobbyEnterButton?.setOnClickListener {
-            findNavController().navigate(R.id.action_lobbyFragment_to_homeFragment)
+            if(validateFields()){
+                mViewModel?.enterInControl(binding?.lobbyIdInput?.text.toString()){isSuccess, message ->
+                    if(isSuccess){
+                        findNavController().navigate(R.id.action_lobbyFragment_to_homeFragment)
+                    }else{
+                        Snackbar.make(requireView(), "Não foi possivel entrar neste controle: $message", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+            }else{
+                Snackbar.make(requireView(), "Preencha o campo de ID com um ID valido!", Snackbar.LENGTH_SHORT).show()
+            }
+
         }
 
         binding?.lobbyCreateNewControlButton?.setOnClickListener {
@@ -100,6 +102,10 @@ class LobbyFragment : Fragment(R.layout.fragment_lobby) {
                 setNegativeButton("Não", null)
             }.show()
         }
+    }
+
+    private fun validateFields(): Boolean {
+        return !binding?.lobbyIdInput?.text.isNullOrEmpty()
     }
 
     private fun bindView(view: View) {

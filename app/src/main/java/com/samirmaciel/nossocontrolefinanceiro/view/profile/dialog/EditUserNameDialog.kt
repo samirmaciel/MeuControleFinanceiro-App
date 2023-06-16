@@ -20,7 +20,7 @@ class EditUserNameDialog(val oldUserName: String, val onFinish: (String?) -> Uni
     }
 
     private fun setupUI() {
-        binding?.dialogEditUserNameInput?.setText(oldUserName)
+        binding?.dialogEditUserNameInput?.hint = oldUserName
     }
 
     private fun setListeners() {

@@ -136,4 +136,9 @@ class ProfileViewModel: ViewModel() {
 
     }
 
+    fun logout(onFinish: () -> Unit) {
+        auth.signOut()
+        onFinish()
+    }
+
 }

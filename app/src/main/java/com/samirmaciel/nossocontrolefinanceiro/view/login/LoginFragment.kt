@@ -56,7 +56,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun setEnterButtonVisibility(validateInputs: Boolean?) {
-        binding?.loginEnterButton?.isEnabled = validateInputs == true
+        if(validateInputs == true){
+            binding?.loginEnterButton?.isEnabled = true
+            binding?.loginEnterButton?.setTextColor(resources.getColor(R.color.white))
+        }else{
+            binding?.loginEnterButton?.isEnabled = false
+            binding?.loginEnterButton?.setTextColor(resources.getColor(R.color.darkBlue))
+        }
+
     }
 
     private fun setViewModel() {
@@ -70,13 +77,18 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         binding?.loginEnterButton?.setOnClickListener {
             isLoading(true)
-            mViewModel?.makeLogin{
-                if(it.first){
+            mViewModel?.makeLogin{ isSucess, hasControl, message ->
+                if(isSucess){
                     isLoading(false)
-                    findNavController().navigate(R.id.action_loginFragment_to_lobbyFragment)
+                    if(hasControl){
+                        findNavController()?.navigate(R.id.action_loginFragment_to_homeFragment)
+                    }else{
+                        findNavController().navigate(R.id.action_loginFragment_to_lobbyFragment)
+                    }
+
                 }else{
                     isLoading(false)
-                    Toast.makeText(requireContext(), it.second, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
                 }
             }
 

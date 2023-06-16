@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
 
 class LoginViewModel : ViewModel() {
@@ -48,19 +49,44 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-    fun makeLogin(onFinish : (Pair<Boolean, String>) -> Unit){
+    fun makeLogin(onFinish : (Boolean, Boolean, String) -> Unit){
         mAuth.signInWithEmailAndPassword(emailInput.value.toString(), passwordInput.value.toString()).addOnCompleteListener {
 
             it.addOnSuccessListener {
                 val firebaseUser = it.user
 
-                onFinish(Pair(true, firebaseUser?.displayName.toString()))
+                getUserData(firebaseUser?.uid){ hasControl ->
+
+                    onFinish(true, hasControl, firebaseUser?.displayName.toString())
+
+                }
+
             }
 
             it.addOnFailureListener {
-                onFinish(Pair(false, it.localizedMessage))
+                onFinish(false, false, it.localizedMessage)
             }
         }
+    }
+
+    private fun getUserData(userID: String?, onFinish: (Boolean) -> Unit) {
+
+        userID?.let{
+            mFirebaseStore.collection(CollectionsNames.USERS).document(it).get().addOnCompleteListener {
+                it.addOnSuccessListener {
+                    val user = it.toObject(User::class.java)
+                    if(user?.currentControlId != null){
+                        onFinish(true)
+                    }else{
+                        onFinish(false)
+                    }
+                }
+                it.addOnFailureListener {
+                    onFinish(false)
+                }
+            }
+        }
+
     }
 
     fun validateInputs() : Boolean {

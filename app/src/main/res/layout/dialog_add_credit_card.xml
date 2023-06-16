@@ -5,7 +5,7 @@
     app:cardCornerRadius="5dp"
     app:cardElevation="0dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -16,7 +16,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             app:cardCornerRadius="5dp"
@@ -38,6 +38,7 @@
 
                 <EditText
                     android:id="@+id/addCreditCard_name_input"
+                    android:layout_width="match_parent"
                     android:layout_marginEnd="8dp"
                     android:hint="@string/hint_insert_name_credit_card"
                     style="@style/edit_default"/>
@@ -230,7 +231,6 @@
                     style="@style/button_default" />
 
             </LinearLayout>
-
 
         </androidx.cardview.widget.CardView>
 

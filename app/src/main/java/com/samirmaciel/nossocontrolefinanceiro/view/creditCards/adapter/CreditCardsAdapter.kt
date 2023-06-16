@@ -1,4 +1,4 @@
-package com.samirmaciel.nossocontrolefinanceiro.view.myCreditCards.adapter
+package com.samirmaciel.nossocontrolefinanceiro.view.creditCards.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +11,10 @@ import com.bumptech.glide.Glide
 import com.samirmaciel.nossocontrolefinanceiro.R
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.CreditCard
 import de.hdodenhof.circleimageview.CircleImageView
+import java.text.NumberFormat
+import java.util.Locale
 
-class MyCreditCardsAdapter : RecyclerView.Adapter<MyCreditCardsAdapter.MyViewHolder>() {
+class CreditCardsAdapter : RecyclerView.Adapter<CreditCardsAdapter.MyViewHolder>() {
 
     private var creditCardsList: MutableList<CreditCard> = mutableListOf()
 
@@ -28,8 +30,8 @@ class MyCreditCardsAdapter : RecyclerView.Adapter<MyCreditCardsAdapter.MyViewHol
         fun bindItem(creditCard: CreditCard){
             Glide.with(itemView.context).load(creditCard.user?.image).into(userImageView)
             creditCardName.text = creditCard.description
-            creditCardLimitAvailable.text = creditCard.availableLimit.toString()
-            creditCardLimitTotal.text = creditCard.limitTotal.toString()
+            creditCardLimitAvailable.text = NumberFormat.getCurrencyInstance(Locale.getDefault()).format(creditCard.availableLimit).toString()
+            creditCardLimitTotal.text = NumberFormat.getCurrencyInstance(Locale.getDefault()).format(creditCard.limitTotal).toString()
             creditCardDetailsButton.setOnClickListener {
                 Toast.makeText(itemView.context, "Click Details", Toast.LENGTH_SHORT).show()
             }

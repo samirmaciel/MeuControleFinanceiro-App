@@ -1,6 +1,5 @@
 package com.samirmaciel.nossocontrolefinanceiro.view.myTransactions.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -17,7 +16,7 @@ class MyTransactionsViewModel: ViewModel() {
     private val fireStore : FirebaseFirestore = FirebaseFirestore.getInstance()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    val transactionsList: MutableLiveData<MutableList<Transaction>?> = MutableLiveData()
+    val transactions: MutableLiveData<MutableList<Transaction?>?> = MutableLiveData()
 
     init {
         loadCurrentUser()
@@ -53,12 +52,37 @@ class MyTransactionsViewModel: ViewModel() {
 
                     control?.let {
                         currentControl.value = it
-                        transactionsList.value = it.transactions
-
+                        loadTransactions(it.id, user.id)
                     }
                 }
 
                 it.addOnFailureListener {
+
+                }
+            }
+        }
+
+    }
+
+    private fun loadTransactions(controlID: String?, userID: String?) {
+        controlID?.let {
+            val collectionPath = "${CollectionsNames.CONTROLDATA}/${it}/Transactions"
+            fireStore.collection(collectionPath).whereEqualTo("userID", userID).get().addOnCompleteListener {task ->
+                task.addOnSuccessListener {
+                    val transactionDocuments = task.result?.documents
+                    if (transactionDocuments != null) {
+                        val transactionList = mutableListOf<Transaction?>()
+                        for (document in transactionDocuments) {
+                            val transaction = document.toObject(Transaction::class.java)
+                            transactionList.add(transaction)
+                        }
+
+                       transactions.value = transactionList
+
+                    }
+                }
+
+                task.addOnFailureListener {
 
                 }
             }

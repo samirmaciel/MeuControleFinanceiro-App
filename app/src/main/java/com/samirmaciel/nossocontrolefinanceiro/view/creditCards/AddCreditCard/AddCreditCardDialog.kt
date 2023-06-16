@@ -4,9 +4,12 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.samirmaciel.nossocontrolefinanceiro.R
 import com.samirmaciel.nossocontrolefinanceiro.databinding.DialogAddCreditCardBinding
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.CreditCard
@@ -14,9 +17,10 @@ import com.samirmaciel.nossocontrolefinanceiro.model.firebase.InstallmentPurchas
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
 import com.samirmaciel.nossocontrolefinanceiro.view.creditCards.adapter.InstallmentPurchasesAdapter
 import com.samirmaciel.nossocontrolefinanceiro.view.creditCards.viewModel.AddCreditCardViewModel
+import java.util.Date
 import kotlin.random.Random
 
-class AddCreditCardDialog(val currentUser: User?, val onFinish: (CreditCard) -> Unit) : DialogFragment(R.layout.dialog_add_credit_card) {
+class AddCreditCardDialog(val parent: Fragment, val currentUser: User?, val onFinish: (CreditCard) -> Unit) : DialogFragment(R.layout.dialog_add_credit_card) {
 
     private var binding : DialogAddCreditCardBinding? = null
     private var viewModel: AddCreditCardViewModel? = null
@@ -29,24 +33,49 @@ class AddCreditCardDialog(val currentUser: User?, val onFinish: (CreditCard) -> 
         setupBackgroundTransaparent()
         setObserver()
         setListeners()
+
+        //dialog?.window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
     }
 
     private fun setListeners() {
         binding?.addCreditCardAddCashPurchasesButton?.setOnClickListener {
-            viewModel?.addInstallmentPurchase(getInstallmentPurchase())
-            clearInstallmentPurchaseFields()
+            if(validateInstallmentPurchasesField()){
+                viewModel?.addInstallmentPurchase(getInstallmentPurchase())
+                clearInstallmentPurchaseFields()
+            }else{
+                Snackbar.make(requireView(), "Preencha todos os campos da compra parcelada!", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         binding?.addCreditCardConfirmButton?.setOnClickListener {
-            getCreditCard()
+            if(validateCreditCardFields()){
+                getCreditCard()
+            }else{
+                Snackbar.make(requireView(), "Preencha todos os campos do cartão de credito!", Toast.LENGTH_SHORT).show()
+            }
+
         }
+    }
+
+    private fun validateInstallmentPurchasesField(): Boolean {
+        return !binding?.addCreditCardCashPurchasesDescriptionInput?.text.isNullOrEmpty() &&
+                !binding?.addCreditCardCashPurchasesValueInput?.text.isNullOrEmpty() &&
+                !binding?.addCreditCardCashPurchasesTotalQuantityInput?.text.isNullOrEmpty() &&
+                !binding?.addCreditCardCashPurchasesPayedInput?.text.isNullOrEmpty()
+    }
+
+    private fun validateCreditCardFields(): Boolean {
+        return !binding?.addCreditCardNameInput?.text.isNullOrEmpty() &&
+                !binding?.addCreditCardLimitAvailableValueInput?.text.isNullOrEmpty() &&
+                !binding?.addCreditCardLimitTotalValueInput?.text.isNullOrEmpty()
     }
 
     private fun getCreditCard() {
         val creditCard = CreditCard()
 
         creditCard.apply{
-            id = Random.nextInt(100, 900).toString()
+            id = "CC${Date().time}"
             description = binding?.addCreditCardNameInput?.text.toString()
             limitTotal = binding?.addCreditCardLimitTotalValueInput?.text.toString().toDouble()
             availableLimit = binding?.addCreditCardLimitAvailableValueInput?.text.toString().toDouble()

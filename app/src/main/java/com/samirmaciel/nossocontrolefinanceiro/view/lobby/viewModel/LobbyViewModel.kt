@@ -1,5 +1,6 @@
 package com.samirmaciel.nossocontrolefinanceiro.view.lobby.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -97,5 +98,43 @@ class LobbyViewModel : ViewModel() {
             }
         }
 
+    }
+
+    fun enterInControl(controlID: String, onFinish: (Boolean, String?) -> Unit) {
+        mFireStore.collection(CollectionsNames.CONTROLS).document(controlID).get().addOnCompleteListener {
+            it.addOnSuccessListener {
+                val control = it.toObject(Control::class.java)
+                if(control != null) {
+                    control.members?.add(currentUser.value!!)
+                    currentUser.value?.currentControlId = control.id
+                    updateControl(control){isSuccess, message ->
+                        if(isSuccess){
+                            updateCurrentUser(currentUser.value!!)
+                            onFinish(true, null)
+                        }else{
+                            onFinish(false, message)
+                        }
+                    }
+                }else{
+                    onFinish(false, null)
+                }
+            }
+
+            it.addOnFailureListener {
+                onFinish(false, it.localizedMessage)
+            }
+        }
+    }
+
+    private fun updateControl(control: Control, onFinish: (Boolean, String?) -> Unit) {
+        mFireStore.collection(CollectionsNames.CONTROLS).document(control.id!!).set(control).addOnCompleteListener {
+            it.addOnSuccessListener {
+                onFinish(true, null)
+            }
+
+            it.addOnFailureListener {
+                onFinish(false, it.localizedMessage)
+            }
+        }
     }
 }

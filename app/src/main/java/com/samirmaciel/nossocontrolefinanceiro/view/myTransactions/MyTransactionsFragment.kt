@@ -1,7 +1,6 @@
 package com.samirmaciel.nossocontrolefinanceiro.view.myTransactions
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +11,7 @@ import com.samirmaciel.nossocontrolefinanceiro.databinding.FragmentMyTransaction
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Transaction
 import com.samirmaciel.nossocontrolefinanceiro.util.LoadState
 import com.samirmaciel.nossocontrolefinanceiro.view.myTransactions.viewModel.MyTransactionsViewModel
+import com.samirmaciel.nossocontrolefinanceiro.view.transactions.adapter.TransactionAdapter
 
 
 class MyTransactionsFragment : Fragment(R.layout.fragment_my_transactions) {
@@ -29,7 +29,7 @@ class MyTransactionsFragment : Fragment(R.layout.fragment_my_transactions) {
     }
 
     private fun setObservers() {
-        viewModel?.transactionsList?.observe(viewLifecycleOwner) { list ->
+        viewModel?.transactions?.observe(viewLifecycleOwner) { list ->
             if(list.isNullOrEmpty()){
                 loadState(LoadState.ON_FINISH)
                 setEmptyListMessageVisibility(true)
@@ -52,8 +52,8 @@ class MyTransactionsFragment : Fragment(R.layout.fragment_my_transactions) {
         }
     }
 
-    private fun setupAdapter(list: MutableList<Transaction>) {
-        val transactionsAdapter = MyTransactionAdapter()
+    private fun setupAdapter(list: MutableList<Transaction?>) {
+        val transactionsAdapter = TransactionAdapter()
 
         binding?.myTransactionsRecyclerView?.apply {
             adapter = transactionsAdapter

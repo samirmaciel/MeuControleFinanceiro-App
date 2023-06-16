@@ -1,5 +1,6 @@
 package com.samirmaciel.nossocontrolefinanceiro.view.profile
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -79,6 +80,19 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         binding?.profileBackButton?.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        binding?.profileLogoutButton?.setOnClickListener {
+            AlertDialog.Builder(requireContext()).apply {
+                setTitle("Deseja realmente sair?")
+                setPositiveButton("Sim"){_,_ ->
+                    viewModel?.logout(){
+                        findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+                    }
+                }
+                setNegativeButton("Não", null)
+            }.show()
+
         }
     }
 

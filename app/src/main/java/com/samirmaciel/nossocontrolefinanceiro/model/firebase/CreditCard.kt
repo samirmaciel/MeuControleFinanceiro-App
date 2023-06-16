@@ -9,4 +9,9 @@ data class CreditCard(
     var installmentPurchases: List<InstallmentPurchase>? = null,
     var user: User? = null
 
-)
+){
+
+    override fun toString(): String {
+        return description.toString()
+    }
+}

@@ -21,7 +21,7 @@
         <TextView
             style="@style/title_medium"
             android:textColor="@color/darkBlue"
-            android:textSize="14sp"
+            android:textSize="@dimen/homeMenuTextSize"
             android:layout_margin="16dp"
             android:text="@string/title_filter"/>
 
@@ -46,7 +46,7 @@
         style="@style/title_medium"
         android:text="@string/title_last_transactions"
         android:textColor="@color/darkBlue"
-        android:textSize="12sp"/>
+        android:textSize="@dimen/homeMenuTextSize"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transactions_lastTransactions_recyclerView"

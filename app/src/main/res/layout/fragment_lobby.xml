@@ -60,7 +60,6 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/lobby_enter_button"
             style="@style/button_default"
-            android:enabled="false"
             android:layout_marginTop="18dp"
             android:text="@string/title_enter"
             app:cornerRadius="5dp" />

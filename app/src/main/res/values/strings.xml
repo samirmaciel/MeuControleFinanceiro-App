@@ -41,13 +41,13 @@
     <string name="title_category">Categoria:</string>
     <string name="title_card">Cartão:</string>
     <string name="title_value">Valor:</string>
-    <string name="hint_money_value">R$00,0</string>
+    <string name="hint_money_value">R$0,00</string>
     <string name="hint_insert_name_credit_card">Insira um nome para seu cartão</string>
     <string name="title_value_of_cash_purchases">Valor da parcela:</string>
     <string name="title_total_cash_purchases">Total de parcelas:</string>
     <string name="title_total_cash_purchases_payed">Total de parcelas pagas:</string>
     <string name="title_add">Adicionar</string>
-    <string name="title_payments_cash_purchases">Compras parceladas</string>
+    <string name="title_payments_cash_purchases">Compra parcelada</string>
     <string name="hint_name_category">Nome da categoria</string>
     <string name="alert_message_username">Você precisa preencher o campo nome</string>
     <string name="alert_message_email">Você precisa preencher com um email valido</string>
@@ -58,5 +58,12 @@
     <string name="title_control_without_transactions">Seu controle não possui nenhuma transação!</string>
     <string name="title_categories_empty">Seu controle não possui nenhuma categoria!</string>
     <string name="title_credit_cards_list_empty">Seu controle não possui nenhum cartão de credito!</string>
+
+
+    <array name="PaymentType">
+        <item>Crédito</item>
+        <item>Debito</item>
+        <item>Dinheiro</item>
+    </array>
 
 </resources>

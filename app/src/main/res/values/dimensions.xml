@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="profileMenuTextSize">15sp</dimen>
+    <dimen name="titlePage">20sp</dimen>
+    <dimen name="homeMenuIconSize">50dp</dimen>
+    <dimen name="homeMenuTextSize">15sp</dimen>
+    <dimen name="dialogTextSize">15sp</dimen>
+</resources>

@@ -9,8 +9,12 @@ data class Transaction(
     var category: String? = null,
     var type: String? = null,
     var creditCardId: String? = null,
+    var day: String? = null,
+    var month: String? = null,
+    var year: String? = null,
     var date: Date? = null,
     var value: Double? = null,
+    var userID: String? = null,
     var user: User? = null
 
 )

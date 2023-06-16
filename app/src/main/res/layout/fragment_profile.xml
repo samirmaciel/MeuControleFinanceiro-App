@@ -20,7 +20,7 @@
             android:id="@+id/profile_back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="50dp"
             android:layout_marginStart="16dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/baseline_arrow_back_24"
@@ -32,10 +32,10 @@
             style="@style/title_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="50dp"
             android:text="@string/title_profile"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/titlePage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -83,7 +83,7 @@
             android:layout_marginVertical="20dp"
             android:layout_marginStart="20dp"
             style="@style/title_regular"
-            android:textSize="12sp"
+            android:textSize="@dimen/profileMenuTextSize"
             android:textColor="@color/black"
             android:text="@string/title_id"/>
 
@@ -93,7 +93,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             style="@style/title_regular"
-            android:textSize="12sp"
+            android:textSize="@dimen/profileMenuTextSize"
             android:textColor="@color/black"
             tools:text="23jf892hf"/>
 
@@ -127,7 +127,7 @@
             android:layout_marginStart="20dp"
             android:layout_weight="1"
             style="@style/title_medium"
-            android:textSize="12sp"
+            android:textSize="@dimen/profileMenuTextSize"
             android:textColor="@color/black"
             tools:text="João"/>
 
@@ -159,7 +159,7 @@
             android:layout_marginStart="20dp"
             android:layout_weight="1"
             style="@style/title_regular"
-            android:textSize="12sp"
+            android:textSize="@dimen/profileMenuTextSize"
             android:textColor="@color/black"
             android:text="@string/title_my_credit_cards"/>
 
@@ -191,7 +191,7 @@
             android:layout_marginStart="20dp"
             android:layout_weight="1"
             style="@style/title_regular"
-            android:textSize="12sp"
+            android:textSize="@dimen/profileMenuTextSize"
             android:textColor="@color/black"
             android:text="@string/title_my_transactions"/>
 
@@ -222,7 +222,7 @@
             android:layout_marginStart="20dp"
             android:layout_weight="1"
             style="@style/title_regular"
-            android:textSize="12sp"
+            android:textSize="@dimen/profileMenuTextSize"
             android:textColor="@color/black"
             android:text="@string/title_categories"/>
 
