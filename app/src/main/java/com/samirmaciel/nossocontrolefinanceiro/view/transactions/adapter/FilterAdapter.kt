@@ -1,17 +1,19 @@
 package com.samirmaciel.nossocontrolefinanceiro.view.transactions.adapter
 
-import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.samirmaciel.nossocontrolefinanceiro.R
-import com.samirmaciel.nossocontrolefinanceiro.model.Filter
+import com.samirmaciel.nossocontrolefinanceiro.model.FilterTransaction
+import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Filter
+import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Transaction
+import com.samirmaciel.nossocontrolefinanceiro.util.FilterTransactionType
 
-class FilterAdapter(val onSelect: (Filter) -> Unit) :
+class FilterAdapter(val activatedFiltersResult: (FilterTransaction) -> Unit) :
     RecyclerView.Adapter<FilterAdapter.MyViewHolder>() {
 
     private var filterList = mutableListOf<Filter>()
@@ -20,20 +22,21 @@ class FilterAdapter(val onSelect: (Filter) -> Unit) :
         val name = itemView.findViewById<TextView>(R.id.item_filter_title)
         val linearLayout = itemView.findViewById<LinearLayout>(R.id.item_filter_cardview)
 
-        fun bindItem(filter: Filter, onSelect: (Filter) -> Unit) {
+        fun bindItem(position: Int) {
 
-            if(filter.isSelected){
+            if (filterList[position].isActive) {
                 name.setTextColor(itemView.resources.getColor(R.color.white))
                 linearLayout.background = itemView.resources.getDrawable(R.drawable.filter_selected)
-            }else{
+            } else {
                 name.setTextColor(itemView.resources.getColor(R.color.darkBlue))
-                linearLayout.background = itemView.resources.getDrawable(R.drawable.filter_unselected)
+                linearLayout.background =
+                    itemView.resources.getDrawable(R.drawable.filter_unselected)
             }
 
-            name.text = filter.name
+            name.text = filterList[position].name
             linearLayout.setOnClickListener {
-                onSelect(filter)
-                setSelectedFilter(filter)
+                filterList[position].isActive = !filterList[position].isActive
+                activateOrInactivateFilter(filterList[position])
             }
         }
     }
@@ -49,13 +52,57 @@ class FilterAdapter(val onSelect: (Filter) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bindItem(filterList[position], onSelect)
+        holder.bindItem(position)
     }
 
-    private fun setSelectedFilter(filter: Filter){
-        filterList.forEach {
-            it.isSelected = filter.name == it.name
+    private fun activateOrInactivateFilter(filter: Filter) {
+        val filterTransaction = FilterTransaction()
+
+        val filterUserName = mutableListOf<String>()
+        val filterPaymentType = mutableListOf<String>()
+        val filterCategory = mutableListOf<String>()
+
+        filterList.forEach { sourceFilter ->
+
+            if(filter.filterType == FilterTransactionType.HIGHESTVALUE && filter.isActive){
+                filterTransaction.valueFilterType = FilterTransactionType.HIGHESTVALUE
+                if(sourceFilter.filterType == FilterTransactionType.SMALLESTVALUE){
+                    sourceFilter.isActive = false
+                }
+            }
+
+            if(filter.filterType == FilterTransactionType.SMALLESTVALUE && filter.isActive){
+                filterTransaction.valueFilterType = FilterTransactionType.SMALLESTVALUE
+                if(sourceFilter.filterType == FilterTransactionType.HIGHESTVALUE){
+                    sourceFilter.isActive = false
+                }
+            }
+
+            when (sourceFilter.filterType) {
+                FilterTransactionType.USERNAME -> {
+                    if (sourceFilter.isActive)
+                        filterUserName.add(sourceFilter.name)
+                }
+
+                FilterTransactionType.PAYMENTTYPE -> {
+                    if (sourceFilter.isActive)
+                        filterPaymentType.add(sourceFilter.name)
+                }
+
+                FilterTransactionType.CATEGORY -> {
+                    if (sourceFilter.isActive)
+                        filterCategory.add(sourceFilter.name)
+                }
+
+                else -> {}
+            }
+
         }
+
+        filterTransaction.categoryListSelected = filterCategory
+        filterTransaction.paymentTypeListSelected = filterPaymentType
+        filterTransaction.userNameListSelected = filterUserName
+        activatedFiltersResult(filterTransaction)
 
         notifyDataSetChanged()
     }

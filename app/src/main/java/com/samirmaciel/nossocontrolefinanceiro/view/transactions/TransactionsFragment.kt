@@ -8,7 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.samirmaciel.nossocontrolefinanceiro.R
 import com.samirmaciel.nossocontrolefinanceiro.databinding.FragmentTransactionsBinding
-import com.samirmaciel.nossocontrolefinanceiro.model.Filter
+import com.samirmaciel.nossocontrolefinanceiro.model.FilterTransaction
+import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Filter
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Transaction
 import com.samirmaciel.nossocontrolefinanceiro.view.transactions.adapter.FilterAdapter
 import com.samirmaciel.nossocontrolefinanceiro.view.transactions.adapter.TransactionAdapter
@@ -20,6 +21,7 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
 
     private var binding : FragmentTransactionsBinding? = null
     private var viewModel: TransactionsViewModel? = null
+    private var transactionsAdapter: TransactionAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,7 +42,6 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
 
     private fun setObserver() {
         viewModel?.filters?.observe(viewLifecycleOwner){
-
             it?.let { list ->
                 setupFilterAdapter(list)
             }
@@ -55,25 +56,18 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
     }
 
     private fun setupTransactionAdapter(list: MutableList<Transaction?>) {
-        val transactionAdapter = TransactionAdapter()
+        transactionsAdapter = TransactionAdapter()
 
         binding?.transactionsLastTransactionsRecyclerView?.apply {
-            adapter = transactionAdapter
+            adapter = transactionsAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
-        transactionAdapter.setTransactionList(list)
-        transactionAdapter.notifyDataSetChanged()
+        transactionsAdapter?.setTransactionList(list)
     }
 
     private fun setupFilterAdapter(list: MutableList<Filter>) {
         val filterAdapter = FilterAdapter{
-            when(it.name){
-                "Maior" ->{
-                    viewModel?.filterTransactionListToHighest()}
-                "Menor" -> {
-                    viewModel?.filterTransactionListToSmaller()
-                }
-            }
+              transactionsAdapter?.setFilter(it)
         }
 
         binding?.transactionsFilterRecyclerview?.apply {

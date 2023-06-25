@@ -6,12 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
-import com.samirmaciel.nossocontrolefinanceiro.model.Filter
+import com.samirmaciel.nossocontrolefinanceiro.model.FilterTransaction
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
+import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Filter
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Transaction
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
+import com.samirmaciel.nossocontrolefinanceiro.util.FilterTransactionType
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -22,6 +23,8 @@ class TransactionsViewModel : ViewModel() {
     val transactions: MutableLiveData<MutableList<Transaction?>?> = MutableLiveData()
     val currentUser: MutableLiveData<User> = MutableLiveData()
     val currentControl: MutableLiveData<Control> = MutableLiveData()
+
+    var sourceTransactionsList: MutableList<Transaction?> = mutableListOf()
 
     val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val mFireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -48,6 +51,7 @@ class TransactionsViewModel : ViewModel() {
                         }
 
                         transactions.value = transactionList
+                        sourceTransactionsList = transactionList
 
                     }
                 }
@@ -59,14 +63,18 @@ class TransactionsViewModel : ViewModel() {
     private fun loadDefaultFilters(currentControl: Control?) {
         val filtersList = mutableListOf<Filter>()
 
-        val highest = Filter("Maior", false)
-        val smaller = Filter("Menor", false)
+        val highest = Filter("Maior", FilterTransactionType.HIGHESTVALUE, false)
+        val smaller = Filter("Menor", FilterTransactionType.SMALLESTVALUE, false)
 
         filtersList.add(highest)
         filtersList.add(smaller)
 
+        currentControl?.categories?.forEach {
+            filtersList.add(Filter(it, FilterTransactionType.CATEGORY, false))
+        }
+
         currentControl?.members?.forEach {
-            filtersList.add(Filter(it.name!!, false))
+            filtersList.add(Filter(it.name!!, FilterTransactionType.USERNAME, false))
         }
 
         filtersList.reverse()
