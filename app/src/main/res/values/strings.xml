@@ -58,6 +58,8 @@
     <string name="title_control_without_transactions">Seu controle não possui nenhuma transação!</string>
     <string name="title_categories_empty">Seu controle não possui nenhuma categoria!</string>
     <string name="title_credit_cards_list_empty">Seu controle não possui nenhum cartão de credito!</string>
+    <string name="title_due_date">Dia de vencimento:</string>
+    <string name="title_installment_purchases_placeholder">Sem nenhuma compra parcelada!</string>
 
 
     <array name="PaymentType">

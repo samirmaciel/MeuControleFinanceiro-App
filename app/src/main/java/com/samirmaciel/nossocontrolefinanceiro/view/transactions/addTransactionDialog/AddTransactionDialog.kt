@@ -129,7 +129,7 @@ class AddTransactionDialog(val control: Control?, val onFinish: (Transaction?, I
         }
     }
 
-    private fun setupCreditCardSpinnerAdapter(list: List<CreditCard>) {
+    private fun setupCreditCardSpinnerAdapter(list: List<CreditCard?>) {
         val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item_layout, list)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 

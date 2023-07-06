@@ -16,46 +16,50 @@ class MyCreditCardsViewModel : ViewModel() {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    val creditCardsList: MutableLiveData<MutableList<CreditCard>?> = MutableLiveData()
+    val creditCardList: MutableLiveData<MutableList<CreditCard?>> = MutableLiveData()
 
     init {
         loadCurrentUser()
     }
 
-    fun addCreditCard(creditCard: CreditCard){
-        val control = currentControl.value
+    private fun loadCreditCard(){
+        val controlID = currentControl?.value?.id
+        val collectionPath = "${CollectionsNames.CONTROLDATA}/${controlID}/CreditCards"
 
-        if(control?.creditCards.isNullOrEmpty()){
-            val newList = mutableListOf<CreditCard>()
-            newList.add(creditCard)
-            control?.creditCards = newList
-        }else{
-            control?.creditCards?.add(creditCard)
-        }
+        fireStore.collection(collectionPath).get()
+            .addOnCompleteListener { task ->
+                task.addOnSuccessListener {
+                    val transactionDocuments = task.result?.documents
+                    if (transactionDocuments != null) {
+                        val creditCardList = mutableListOf<CreditCard?>()
+                        for (document in transactionDocuments) {
+                            val creditCard = document.toObject(CreditCard::class.java)
+                            creditCardList.add(creditCard)
+                        }
 
-        updateControl(control){ isSucess, message ->
+                        this.creditCardList.value = creditCardList
 
-        }
-
+                    }
+                }
+            }
     }
 
-    private fun updateControl(newControl: Control?, onFinish: (Boolean, String) -> Unit) {
+    fun saveCreditCard(creditCard: CreditCard) {
+        creditCard.user = currentUser.value
+        fireStore.collection(CollectionsNames.CONTROLDATA)
+            .document(currentControl.value?.id!!).collection("CreditCards")
+            .document(creditCard.id!!).set(creditCard).addOnCompleteListener {
 
-        newControl?.id?.let {
-            fireStore.collection(CollectionsNames.CONTROLS).document(it).set(newControl).addOnCompleteListener {
                 it.addOnSuccessListener {
-                    currentControl.value = newControl
-                    creditCardsList.value = newControl.creditCards
-                    onFinish(true, "Controle atualizado com sucesso!")
-                }
 
+                }
                 it.addOnFailureListener {
 
                 }
             }
-        }
 
     }
+
 
     private fun loadCurrentUser() {
         val firebaseUser = auth.currentUser
@@ -86,7 +90,7 @@ class MyCreditCardsViewModel : ViewModel() {
 
                     control?.let {
                         currentControl.value = it
-                        creditCardsList.value = it.creditCards
+                        loadCreditCard()
                     }
                 }
 

@@ -48,6 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setViewModel() {
         mViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        setSelectedPage(mViewModel?.currentPageSelected!!)
     }
 
     private fun setListeners() {
@@ -78,6 +79,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
     private fun setSelectedPage(page: String) {
+        mViewModel?.currentPageSelected = page
         when (page) {
             TRANSACTIONSPAGE -> {
                 setToSelectedTitle(binding?.homeTransationsTitle)

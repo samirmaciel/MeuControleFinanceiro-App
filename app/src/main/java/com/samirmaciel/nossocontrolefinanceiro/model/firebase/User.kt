@@ -1,5 +1,8 @@
 package com.samirmaciel.nossocontrolefinanceiro.model.firebase
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+@Parcelize
 data class User(
 
     var id: String? = null,
@@ -7,4 +10,4 @@ data class User(
     var image: String? = null,
     var currentControlId: String? = null
 
-)
+): Parcelable

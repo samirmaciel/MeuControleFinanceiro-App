@@ -31,7 +31,7 @@ class MyTransactionsFragment : Fragment(R.layout.fragment_my_transactions) {
     private fun setObservers() {
         viewModel?.transactions?.observe(viewLifecycleOwner) { list ->
             if(list.isNullOrEmpty()){
-                loadState(LoadState.ON_FINISH)
+                loadStateTransactions(LoadState.ON_FINISH)
                 setEmptyListMessageVisibility(true)
             }else{
                 setEmptyListMessageVisibility(false)
@@ -62,10 +62,10 @@ class MyTransactionsFragment : Fragment(R.layout.fragment_my_transactions) {
         }
 
         transactionsAdapter.setTransactionList(list)
-        loadState(LoadState.ON_FINISH)
+        loadStateTransactions(LoadState.ON_FINISH)
     }
 
-    private fun loadState(state: LoadState) {
+    private fun loadStateTransactions(state: LoadState) {
         when (state) {
             LoadState.ON_LOAD -> {
                 binding?.myTransactionsRecyclerView?.visibility = View.GONE

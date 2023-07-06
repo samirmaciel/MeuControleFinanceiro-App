@@ -1,6 +1,5 @@
 package com.samirmaciel.nossocontrolefinanceiro.view.transactions.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.samirmaciel.nossocontrolefinanceiro.R
 import com.samirmaciel.nossocontrolefinanceiro.model.FilterTransaction
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Filter
-import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Transaction
 import com.samirmaciel.nossocontrolefinanceiro.util.FilterTransactionType
 
-class FilterAdapter(val activatedFiltersResult: (FilterTransaction) -> Unit) :
-    RecyclerView.Adapter<FilterAdapter.MyViewHolder>() {
+class FilterTransactionAdapter(val activatedFiltersResult: (FilterTransaction) -> Unit) :
+    RecyclerView.Adapter<FilterTransactionAdapter.MyViewHolder>() {
 
     private var filterList = mutableListOf<Filter>()
 

@@ -7,10 +7,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.samirmaciel.nossocontrolefinanceiro.R
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.InstallmentPurchase
+import java.text.NumberFormat
+import java.util.Locale
 
 class InstallmentPurchasesAdapter : RecyclerView.Adapter<InstallmentPurchasesAdapter.MyViewHolder>() {
 
-    private var installmentPurchasesList: MutableList<InstallmentPurchase> = mutableListOf()
+    private var installmentPurchasesList: List<InstallmentPurchase> = mutableListOf()
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val description = itemView.findViewById<TextView>(R.id.item_installment_purchase_description)
@@ -20,7 +22,8 @@ class InstallmentPurchasesAdapter : RecyclerView.Adapter<InstallmentPurchasesAda
         fun bindItem(installmentPurchase: InstallmentPurchase){
             description.text = installmentPurchase.description
             installments.text = "${installmentPurchase.installmentsPaid}/${installmentPurchase.totalInstallment}"
-            value.text = installmentPurchase.value.toString()
+            value.text = NumberFormat.getCurrencyInstance(Locale.getDefault()).format(installmentPurchase.value)
+                .toString()
         }
 
     }
@@ -38,7 +41,7 @@ class InstallmentPurchasesAdapter : RecyclerView.Adapter<InstallmentPurchasesAda
         holder.bindItem(installmentPurchasesList[position])
     }
 
-    fun setInstallmentPurchasesList(list: MutableList<InstallmentPurchase>){
+    fun setInstallmentPurchasesList(list: List<InstallmentPurchase>){
         installmentPurchasesList = list
         notifyDataSetChanged()
     }

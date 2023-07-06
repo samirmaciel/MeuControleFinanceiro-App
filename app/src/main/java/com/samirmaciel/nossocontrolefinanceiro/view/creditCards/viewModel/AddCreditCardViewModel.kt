@@ -11,6 +11,7 @@ class AddCreditCardViewModel : ViewModel() {
         mutableListOf()
     )
     val currentCreditCard: MutableLiveData<CreditCard> = MutableLiveData()
+    var dueDate: Int? = null
 
     fun addInstallmentPurchase(installmentPurchase: InstallmentPurchase){
         val oldList = installmentsPurchasesList.value
@@ -23,7 +24,7 @@ class AddCreditCardViewModel : ViewModel() {
         installmentsPurchasesList.value?.remove(installmentPurchase)
     }
 
-    fun addCrediCard(creditCard: CreditCard) {
+    fun addCreditCard(creditCard: CreditCard) {
         creditCard.installmentPurchases = installmentsPurchasesList.value
         currentCreditCard.value = creditCard
     }

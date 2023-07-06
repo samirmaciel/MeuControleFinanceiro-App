@@ -1,17 +1,16 @@
 package com.samirmaciel.nossocontrolefinanceiro.view.transactions
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.samirmaciel.nossocontrolefinanceiro.R
 import com.samirmaciel.nossocontrolefinanceiro.databinding.FragmentTransactionsBinding
-import com.samirmaciel.nossocontrolefinanceiro.model.FilterTransaction
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Filter
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Transaction
-import com.samirmaciel.nossocontrolefinanceiro.view.transactions.adapter.FilterAdapter
+import com.samirmaciel.nossocontrolefinanceiro.util.LoadState
+import com.samirmaciel.nossocontrolefinanceiro.view.transactions.adapter.FilterTransactionAdapter
 import com.samirmaciel.nossocontrolefinanceiro.view.transactions.adapter.TransactionAdapter
 import com.samirmaciel.nossocontrolefinanceiro.view.transactions.addTransactionDialog.AddTransactionDialog
 import com.samirmaciel.nossocontrolefinanceiro.view.transactions.viewModel.TransactionsViewModel
@@ -40,15 +39,49 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
         }
     }
 
+    private fun loadStateTransactions(state: LoadState) {
+        when (state) {
+            LoadState.ON_LOAD -> {
+                binding?.transactionsLastTransactionsRecyclerView?.visibility = View.GONE
+                binding?.transactionsTransactionsProgressbar?.visibility = View.VISIBLE
+                //binding?.myTransactionsTextToListEmpty?.visibility = View.GONE
+            }
+
+            LoadState.ON_FINISH -> {
+                binding?.transactionsLastTransactionsRecyclerView?.visibility = View.VISIBLE
+                binding?.transactionsTransactionsProgressbar?.visibility = View.GONE
+                //binding?.myTransactionsTextToListEmpty?.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun loadStateFilters(state: LoadState) {
+        when (state) {
+            LoadState.ON_LOAD -> {
+                binding?.transactionsFilterRecyclerview?.visibility = View.GONE
+                binding?.transactionsFilterProgressbar?.visibility = View.VISIBLE
+                //binding?.myTransactionsTextToListEmpty?.visibility = View.GONE
+            }
+
+            LoadState.ON_FINISH -> {
+                binding?.transactionsFilterRecyclerview?.visibility = View.VISIBLE
+                binding?.transactionsFilterProgressbar?.visibility = View.GONE
+                //binding?.myTransactionsTextToListEmpty?.visibility = View.GONE
+            }
+        }
+    }
+
     private fun setObserver() {
         viewModel?.filters?.observe(viewLifecycleOwner){
             it?.let { list ->
+                loadStateFilters(LoadState.ON_FINISH)
                 setupFilterAdapter(list)
             }
         }
 
         viewModel?.transactions?.observe(viewLifecycleOwner){
             it?.let {list ->
+                loadStateTransactions(LoadState.ON_FINISH)
                 setupTransactionAdapter(list)
             }
 
@@ -66,17 +99,17 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
     }
 
     private fun setupFilterAdapter(list: MutableList<Filter>) {
-        val filterAdapter = FilterAdapter{
+        val filterTransactionAdapter = FilterTransactionAdapter{
               transactionsAdapter?.setFilter(it)
         }
 
         binding?.transactionsFilterRecyclerview?.apply {
-            adapter = filterAdapter
+            adapter = filterTransactionAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
-        filterAdapter.setFilterList(list)
-        filterAdapter.notifyDataSetChanged()
+        filterTransactionAdapter.setFilterList(list)
+        filterTransactionAdapter.notifyDataSetChanged()
     }
 
     private fun setViewModel() {

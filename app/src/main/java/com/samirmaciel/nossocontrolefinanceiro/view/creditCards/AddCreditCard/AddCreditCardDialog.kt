@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -18,9 +20,8 @@ import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
 import com.samirmaciel.nossocontrolefinanceiro.view.creditCards.adapter.InstallmentPurchasesAdapter
 import com.samirmaciel.nossocontrolefinanceiro.view.creditCards.viewModel.AddCreditCardViewModel
 import java.util.Date
-import kotlin.random.Random
 
-class AddCreditCardDialog(val parent: Fragment, val currentUser: User?, val onFinish: (CreditCard) -> Unit) : DialogFragment(R.layout.dialog_add_credit_card) {
+class AddCreditCardDialog(val parent: Fragment, val currentUser: User?, val onFinish: (CreditCard) -> Unit) : DialogFragment(R.layout.dialog_add_credit_card), AdapterView.OnItemSelectedListener{
 
     private var binding : DialogAddCreditCardBinding? = null
     private var viewModel: AddCreditCardViewModel? = null
@@ -33,6 +34,7 @@ class AddCreditCardDialog(val parent: Fragment, val currentUser: User?, val onFi
         setupBackgroundTransaparent()
         setObserver()
         setListeners()
+        setupSpinnerDueDate()
 
         //dialog?.window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
     }
@@ -45,7 +47,6 @@ class AddCreditCardDialog(val parent: Fragment, val currentUser: User?, val onFi
             }else{
                 Snackbar.make(requireView(), "Preencha todos os campos da compra parcelada!", Toast.LENGTH_SHORT).show()
             }
-
         }
 
         binding?.addCreditCardConfirmButton?.setOnClickListener {
@@ -54,7 +55,6 @@ class AddCreditCardDialog(val parent: Fragment, val currentUser: User?, val onFi
             }else{
                 Snackbar.make(requireView(), "Preencha todos os campos do cartão de credito!", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 
@@ -80,8 +80,9 @@ class AddCreditCardDialog(val parent: Fragment, val currentUser: User?, val onFi
             limitTotal = binding?.addCreditCardLimitTotalValueInput?.text.toString().toDouble()
             availableLimit = binding?.addCreditCardLimitAvailableValueInput?.text.toString().toDouble()
             user = currentUser
+            dueDate = viewModel?.dueDate
         }
-        viewModel?.addCrediCard(creditCard)
+        viewModel?.addCreditCard(creditCard)
     }
 
     private fun clearInstallmentPurchaseFields() {
@@ -110,6 +111,17 @@ class AddCreditCardDialog(val parent: Fragment, val currentUser: User?, val onFi
         viewModel?.currentCreditCard?.observe(viewLifecycleOwner){
             onFinish(it)
             dismiss()
+        }
+    }
+
+    private fun setupSpinnerDueDate(){
+        val numbers = (1..28).toList()
+
+        val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, numbers)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding?.addCreditCardDueDateSpinner?.apply {
+            adapter = spinnerAdapter
+            onItemSelectedListener = this@AddCreditCardDialog
         }
     }
 
@@ -147,5 +159,13 @@ class AddCreditCardDialog(val parent: Fragment, val currentUser: User?, val onFi
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    override fun onItemSelected(list: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+        viewModel?.dueDate = list?.getItemAtPosition(position).toString().toInt()
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+
     }
 }

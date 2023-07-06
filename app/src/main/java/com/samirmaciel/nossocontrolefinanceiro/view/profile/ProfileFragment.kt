@@ -48,7 +48,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun setListeners() {
-        binding?.profileCategoriesButton?.setOnClickListener {
+        binding?.profileLlCategories?.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_categoriesFragment)
         }
 
@@ -66,16 +66,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             captureUserImage()
         }
 
-        binding?.profileMyTransactionsButton?.setOnClickListener {
+        binding?.profileLlMyTransactions?.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_myTransactionsFragment)
         }
 
-        binding?.profileMyCreditCardsButton?.setOnClickListener {
+        binding?.profileLlMyCreditCards?.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_myCreditCardsFragment)
-        }
-
-        binding?.profileSettingsButton?.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_settingsFragment)
         }
 
         binding?.profileBackButton?.setOnClickListener {

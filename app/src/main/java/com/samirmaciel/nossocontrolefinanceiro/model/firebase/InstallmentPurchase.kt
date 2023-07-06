@@ -1,5 +1,9 @@
 package com.samirmaciel.nossocontrolefinanceiro.model.firebase
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class InstallmentPurchase(
 
     var id: String? = null,
@@ -8,4 +12,4 @@ data class InstallmentPurchase(
     var installmentsPaid: Int? = null,
     var value: Double? = null
 
-)
+): Parcelable

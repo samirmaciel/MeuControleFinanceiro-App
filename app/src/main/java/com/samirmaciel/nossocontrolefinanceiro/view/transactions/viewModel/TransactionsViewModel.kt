@@ -24,15 +24,11 @@ class TransactionsViewModel : ViewModel() {
     val currentUser: MutableLiveData<User> = MutableLiveData()
     val currentControl: MutableLiveData<Control> = MutableLiveData()
 
-    var sourceTransactionsList: MutableList<Transaction?> = mutableListOf()
-
     val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val mFireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     init {
-
         loadCurrentUser()
-
     }
 
     private fun loadTransactions(controlID: String) {
@@ -51,15 +47,11 @@ class TransactionsViewModel : ViewModel() {
                         }
 
                         transactions.value = transactionList
-                        sourceTransactionsList = transactionList
 
                     }
                 }
             }
-
-
     }
-
     private fun loadDefaultFilters(currentControl: Control?) {
         val filtersList = mutableListOf<Filter>()
 
@@ -123,25 +115,13 @@ class TransactionsViewModel : ViewModel() {
         }
     }
 
-    fun filterTransactionListToHighest() {
-        var transactionList = transactions.value
-        transactionList = transactionList?.sortedByDescending { it?.value }?.toMutableList()
-        transactions.value = transactionList
-    }
-
-    fun filterTransactionListToSmaller() {
-        var transactionList = transactions.value
-        transactionList = transactionList?.sortedBy { it?.value }?.toMutableList()
-        transactions.value = transactionList
-    }
-
     fun saveTransaction(transaction: Transaction?) {
         if (transaction != null) {
             transaction.user = currentUser.value
             transaction.userID = currentUser.value?.id
             mFireStore.collection(CollectionsNames.CONTROLDATA)
                 .document(currentControl.value?.id!!).collection("Transactions")
-                .document(transaction?.id!!).set(transaction).addOnCompleteListener {
+                .document(transaction.id!!).set(transaction).addOnCompleteListener {
 
                     it.addOnSuccessListener {
 

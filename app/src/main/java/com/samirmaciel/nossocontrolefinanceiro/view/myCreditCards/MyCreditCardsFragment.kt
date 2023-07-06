@@ -29,7 +29,7 @@ class MyCreditCardsFragment : Fragment(R.layout.fragment_my_credit_cards) {
     }
 
     private fun setObservers() {
-        viewModel?.creditCardsList?.observe(viewLifecycleOwner){list ->
+        viewModel?.creditCardList?.observe(viewLifecycleOwner){ list ->
             if(list.isNullOrEmpty()){
                 loadState(LoadState.ON_FINISH)
                 setEmptyListMessageVisibility(true)
@@ -40,8 +40,10 @@ class MyCreditCardsFragment : Fragment(R.layout.fragment_my_credit_cards) {
         }
     }
 
-    private fun setupAdapter(list: MutableList<CreditCard>) {
-        val creditCardsAdapter  = CreditCardsAdapter()
+    private fun setupAdapter(list: MutableList<CreditCard?>) {
+        val creditCardsAdapter  = CreditCardsAdapter(){
+
+        }
 
         binding?.myCreditCardsRecyclerView?.apply {
             adapter  = creditCardsAdapter
@@ -91,7 +93,7 @@ class MyCreditCardsFragment : Fragment(R.layout.fragment_my_credit_cards) {
         binding?.myCreditCardsAddButton?.setOnClickListener {
             AddCreditCardDialog(this, viewModel?.currentUser?.value) {
                 loadState(LoadState.ON_LOAD)
-                viewModel?.addCreditCard(it)
+                viewModel?.saveCreditCard(it)
             }.show(childFragmentManager, "Add Credit Card Dialog Fragment")
         }
     }

@@ -8,11 +8,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
+import com.samirmaciel.nossocontrolefinanceiro.view.home.HomeFragment
 
 class HomeViewModel : ViewModel(){
 
     val currentUser : MutableLiveData<User?> = MutableLiveData()
     val currentControl : MediatorLiveData<Control?> = MediatorLiveData()
+    var currentPageSelected = HomeFragment.TRANSACTIONSPAGE
 
     val mAuth : FirebaseAuth = FirebaseAuth.getInstance()
     val mFirestore : FirebaseFirestore = FirebaseFirestore.getInstance()
