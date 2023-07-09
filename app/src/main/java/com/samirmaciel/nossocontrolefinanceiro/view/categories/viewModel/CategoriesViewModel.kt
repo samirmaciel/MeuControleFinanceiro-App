@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
+import com.samirmaciel.nossocontrolefinanceiro.firebase.Constants
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
 
@@ -40,7 +40,7 @@ class CategoriesViewModel: ViewModel() {
 
     private fun updateControl(newControl: Control?, onFinish: (Boolean, String?) -> Unit) {
         newControl?.id?.let { controlID ->
-            fireStore.collection(CollectionsNames.CONTROLS).document(controlID).set(newControl).addOnCompleteListener {
+            fireStore.collection(Constants.CONTROLS).document(controlID).set(newControl).addOnCompleteListener {
 
                 it.addOnSuccessListener {
                     categoryList.value = newControl.categories
@@ -76,7 +76,7 @@ class CategoriesViewModel: ViewModel() {
 
     private fun loadCurrentControl(user: User?) {
         user?.currentControlId?.let { controlID ->
-            fireStore.collection(CollectionsNames.CONTROLS).document(controlID).get().addOnCompleteListener {
+            fireStore.collection(Constants.CONTROLS).document(controlID).get().addOnCompleteListener {
 
                 it.addOnSuccessListener { documentSnapshot ->
                     val control = documentSnapshot.toObject(Control::class.java)
@@ -99,7 +99,7 @@ class CategoriesViewModel: ViewModel() {
         val firebaseUser = auth.currentUser
 
         firebaseUser?.let {
-            fireStore.collection(CollectionsNames.USERS).document(it.uid).get().addOnCompleteListener {
+            fireStore.collection(Constants.USERS).document(it.uid).get().addOnCompleteListener {
 
                 it.addOnSuccessListener { documentSnapshot ->
                     val user = documentSnapshot.toObject(User::class.java)

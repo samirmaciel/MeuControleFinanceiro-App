@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
+import com.samirmaciel.nossocontrolefinanceiro.firebase.Constants
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Transaction
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
@@ -26,7 +26,7 @@ class MyTransactionsViewModel: ViewModel() {
         val firebaseUser = auth.currentUser
 
         firebaseUser?.let {
-            fireStore.collection(CollectionsNames.USERS).document(it.uid).get().addOnCompleteListener {
+            fireStore.collection(Constants.USERS).document(it.uid).get().addOnCompleteListener {
                 it.addOnSuccessListener {
                     val user = it.toObject(User::class.java)
 
@@ -46,7 +46,7 @@ class MyTransactionsViewModel: ViewModel() {
 
     private fun loadCurrentControl(user: User) {
         user.currentControlId?.let {currentControlID ->
-            fireStore.collection(CollectionsNames.CONTROLS).document(currentControlID).get().addOnCompleteListener {
+            fireStore.collection(Constants.CONTROLS).document(currentControlID).get().addOnCompleteListener {
                 it.addOnSuccessListener {
                     val control = it.toObject(Control::class.java)
 
@@ -66,7 +66,7 @@ class MyTransactionsViewModel: ViewModel() {
 
     private fun loadTransactions(controlID: String?, userID: String?) {
         controlID?.let {
-            val collectionPath = "${CollectionsNames.CONTROLDATA}/${it}/Transactions"
+            val collectionPath = "${Constants.CONTROLDATA}/${it}/Transactions"
             fireStore.collection(collectionPath).whereEqualTo("userID", userID).get().addOnCompleteListener {task ->
                 task.addOnSuccessListener {
                     val transactionDocuments = task.result?.documents

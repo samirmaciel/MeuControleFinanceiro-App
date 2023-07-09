@@ -1,13 +1,11 @@
 package com.samirmaciel.nossocontrolefinanceiro.view.transactions.viewModel
 
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
-import com.samirmaciel.nossocontrolefinanceiro.model.FilterTransaction
+import com.samirmaciel.nossocontrolefinanceiro.firebase.Constants
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Filter
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Transaction
@@ -34,7 +32,7 @@ class TransactionsViewModel : ViewModel() {
     private fun loadTransactions(controlID: String) {
         val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Date()).toString()
 
-        val collectionPath = "${CollectionsNames.CONTROLDATA}/${controlID}/Transactions"
+        val collectionPath = "${Constants.CONTROLDATA}/${controlID}/Transactions"
         mFireStore.collection(collectionPath).whereEqualTo("month", currentMonth).get()
             .addOnCompleteListener { task ->
                 task.addOnSuccessListener {
@@ -75,7 +73,7 @@ class TransactionsViewModel : ViewModel() {
 
     private fun loadCurrentControl(user: User?) {
         user?.currentControlId?.let {
-            mFireStore.collection(CollectionsNames.CONTROLS).document(it).get()
+            mFireStore.collection(Constants.CONTROLS).document(it).get()
                 .addOnCompleteListener {
 
                     it.addOnSuccessListener {
@@ -96,7 +94,7 @@ class TransactionsViewModel : ViewModel() {
     private fun loadCurrentUser() {
         val firebaseUser = mAuth.currentUser
         if (firebaseUser != null) {
-            mFireStore.collection(CollectionsNames.USERS).document(firebaseUser.uid).get()
+            mFireStore.collection(Constants.USERS).document(firebaseUser.uid).get()
                 .addOnCompleteListener {
 
                     it.addOnSuccessListener {
@@ -119,7 +117,7 @@ class TransactionsViewModel : ViewModel() {
         if (transaction != null) {
             transaction.user = currentUser.value
             transaction.userID = currentUser.value?.id
-            mFireStore.collection(CollectionsNames.CONTROLDATA)
+            mFireStore.collection(Constants.CONTROLDATA)
                 .document(currentControl.value?.id!!).collection("Transactions")
                 .document(transaction.id!!).set(transaction).addOnCompleteListener {
 

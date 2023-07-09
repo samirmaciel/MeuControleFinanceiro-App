@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
+import com.samirmaciel.nossocontrolefinanceiro.firebase.Constants
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.CreditCard
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Filter
@@ -40,7 +40,7 @@ class CreditCardViewModel : ViewModel() {
 
     private fun loadCreditCard(){
         val controlID = currentControl?.value?.id
-        val collectionPath = "${CollectionsNames.CONTROLDATA}/${controlID}/CreditCards"
+        val collectionPath = "${Constants.CONTROLDATA}/${controlID}/CreditCards"
 
         fireStore.collection(collectionPath).get()
             .addOnCompleteListener { task ->
@@ -61,7 +61,7 @@ class CreditCardViewModel : ViewModel() {
 
     fun saveCreditCard(creditCard: CreditCard) {
         creditCard.user = currentUser.value
-        fireStore.collection(CollectionsNames.CONTROLDATA)
+        fireStore.collection(Constants.CONTROLDATA)
             .document(currentControl.value?.id!!).collection("CreditCards")
             .document(creditCard.id!!).set(creditCard).addOnCompleteListener {
 
@@ -79,7 +79,7 @@ class CreditCardViewModel : ViewModel() {
         val fireBaseUser = auth.currentUser
 
         fireBaseUser?.let {
-            fireStore.collection(CollectionsNames.USERS).document(it.uid).get()
+            fireStore.collection(Constants.USERS).document(it.uid).get()
                 .addOnCompleteListener {
                     it.addOnSuccessListener {
                         val user = it.toObject(User::class.java)
@@ -99,7 +99,7 @@ class CreditCardViewModel : ViewModel() {
     private fun loadCurrentControl(user: User) {
 
         user.currentControlId?.let {
-            fireStore.collection(CollectionsNames.CONTROLS).document(it).get()
+            fireStore.collection(Constants.CONTROLS).document(it).get()
                 .addOnCompleteListener {
                     it.addOnSuccessListener {
                         val control = it.toObject(Control::class.java)

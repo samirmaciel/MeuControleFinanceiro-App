@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
+import com.samirmaciel.nossocontrolefinanceiro.firebase.Constants
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
 import com.samirmaciel.nossocontrolefinanceiro.view.home.HomeFragment
@@ -33,7 +33,7 @@ class HomeViewModel : ViewModel(){
         val firebaseUser = mAuth.currentUser
 
         if(firebaseUser != null){
-            mFirestore.collection(CollectionsNames.USERS).document(firebaseUser.uid).get().addOnCompleteListener {
+            mFirestore.collection(Constants.USERS).document(firebaseUser.uid).get().addOnCompleteListener {
 
                 it.addOnSuccessListener {
                     val currentUser = it.toObject(User::class.java)
@@ -53,7 +53,7 @@ class HomeViewModel : ViewModel(){
     private fun loadCurrentControl(user: User?){
 
         user?.currentControlId?.let {
-            mFirestore.collection(CollectionsNames.CONTROLS).document(it).get().addOnCompleteListener {
+            mFirestore.collection(Constants.CONTROLS).document(it).get().addOnCompleteListener {
 
                 it.addOnSuccessListener {
                     val currentControl = it.toObject(Control::class.java)

@@ -1,11 +1,10 @@
 package com.samirmaciel.nossocontrolefinanceiro.view.lobby.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
+import com.samirmaciel.nossocontrolefinanceiro.firebase.Constants
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
 import java.util.Date
@@ -51,7 +50,7 @@ class LobbyViewModel : ViewModel() {
                 createdBy = currentUser
             )
 
-            mFireStore.collection(CollectionsNames.CONTROLS).document(newControl.id!!).set(newControl)
+            mFireStore.collection(Constants.CONTROLS).document(newControl.id!!).set(newControl)
                 .addOnCompleteListener {
                     it.addOnSuccessListener {
                         currentUser.currentControlId = newControl.id
@@ -68,7 +67,7 @@ class LobbyViewModel : ViewModel() {
     }
 
     private fun updateCurrentUser(user: User){
-        mFireStore.collection(CollectionsNames.USERS).document(user.id!!).set(user).addOnCompleteListener {
+        mFireStore.collection(Constants.USERS).document(user.id!!).set(user).addOnCompleteListener {
             it.addOnSuccessListener {
 
             }
@@ -83,7 +82,7 @@ class LobbyViewModel : ViewModel() {
         val fireBaseUser = mAuth.currentUser
 
         if (fireBaseUser != null) {
-            mFireStore.collection(CollectionsNames.USERS).document(fireBaseUser.uid).get().addOnCompleteListener {
+            mFireStore.collection(Constants.USERS).document(fireBaseUser.uid).get().addOnCompleteListener {
 
                 it.addOnSuccessListener { document ->
                     if (document.exists()) {
@@ -101,7 +100,7 @@ class LobbyViewModel : ViewModel() {
     }
 
     fun enterInControl(controlID: String, onFinish: (Boolean, String?) -> Unit) {
-        mFireStore.collection(CollectionsNames.CONTROLS).document(controlID).get().addOnCompleteListener {
+        mFireStore.collection(Constants.CONTROLS).document(controlID).get().addOnCompleteListener {
             it.addOnSuccessListener {
                 val control = it.toObject(Control::class.java)
                 if(control != null) {
@@ -127,7 +126,7 @@ class LobbyViewModel : ViewModel() {
     }
 
     private fun updateControl(control: Control, onFinish: (Boolean, String?) -> Unit) {
-        mFireStore.collection(CollectionsNames.CONTROLS).document(control.id!!).set(control).addOnCompleteListener {
+        mFireStore.collection(Constants.CONTROLS).document(control.id!!).set(control).addOnCompleteListener {
             it.addOnSuccessListener {
                 onFinish(true, null)
             }

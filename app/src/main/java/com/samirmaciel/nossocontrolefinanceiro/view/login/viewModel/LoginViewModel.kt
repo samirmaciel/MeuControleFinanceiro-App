@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
+import com.samirmaciel.nossocontrolefinanceiro.firebase.Constants
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
 
 class LoginViewModel : ViewModel() {
@@ -72,7 +72,7 @@ class LoginViewModel : ViewModel() {
     private fun getUserData(userID: String?, onFinish: (Boolean) -> Unit) {
 
         userID?.let{
-            mFirebaseStore.collection(CollectionsNames.USERS).document(it).get().addOnCompleteListener {
+            mFirebaseStore.collection(Constants.USERS).document(it).get().addOnCompleteListener {
                 it.addOnSuccessListener {
                     val user = it.toObject(User::class.java)
                     if(user?.currentControlId != null){

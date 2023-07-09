@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
+import com.samirmaciel.nossocontrolefinanceiro.firebase.Constants
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.CreditCard
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
@@ -26,7 +26,7 @@ class CreditCardDetailViewModel: ViewModel() {
         val fireBaseUser = auth.currentUser
 
         fireBaseUser?.let {
-            fireStore.collection(CollectionsNames.USERS).document(it.uid).get()
+            fireStore.collection(Constants.USERS).document(it.uid).get()
                 .addOnCompleteListener {
                     it.addOnSuccessListener {
                         val user = it.toObject(User::class.java)
@@ -46,7 +46,7 @@ class CreditCardDetailViewModel: ViewModel() {
     }
 
     private fun loadCurrentControl(controlID: String){
-        fireStore.collection(CollectionsNames.CONTROLS).document(controlID).get().addOnCompleteListener {
+        fireStore.collection(Constants.CONTROLS).document(controlID).get().addOnCompleteListener {
 
             it.addOnSuccessListener {documentSnapshot ->
                 val control = documentSnapshot.toObject(Control::class.java)
@@ -65,7 +65,7 @@ class CreditCardDetailViewModel: ViewModel() {
     fun loadCreditCard(credicardID: String){
         val controlID = currentControl.value?.id
 
-        fireStore.collection(CollectionsNames.CONTROLDATA).document(controlID!!).collection("CreditCards").document(credicardID).get()
+        fireStore.collection(Constants.CONTROLDATA).document(controlID!!).collection("CreditCards").document(credicardID).get()
             .addOnCompleteListener { task ->
                 task.addOnSuccessListener {
                     val creditCard = it.toObject(CreditCard::class.java)

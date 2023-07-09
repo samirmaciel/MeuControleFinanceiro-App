@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
+import com.samirmaciel.nossocontrolefinanceiro.firebase.Constants
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
 
@@ -31,7 +31,7 @@ class ProfileViewModel: ViewModel() {
     private fun loadCurrentControl(user: User?) {
 
         user?.currentControlId?.let { controlID ->
-            fireStore.collection(CollectionsNames.CONTROLS).document(controlID).get().addOnCompleteListener {
+            fireStore.collection(Constants.CONTROLS).document(controlID).get().addOnCompleteListener {
 
                 it.addOnSuccessListener { documentSnapshot ->
                     val control = documentSnapshot.toObject(Control::class.java)
@@ -54,7 +54,7 @@ class ProfileViewModel: ViewModel() {
         val firebaseUser = auth.currentUser
 
         firebaseUser?.let {
-            fireStore.collection(CollectionsNames.USERS).document(it.uid).get().addOnCompleteListener {
+            fireStore.collection(Constants.USERS).document(it.uid).get().addOnCompleteListener {
 
                 it.addOnSuccessListener { documentSnapshot ->
                     val user = documentSnapshot.toObject(User::class.java)
@@ -76,7 +76,7 @@ class ProfileViewModel: ViewModel() {
         newUser?.name = newUserName
 
         newUser?.id?.let {
-            fireStore.collection(CollectionsNames.USERS).document(it).set(newUser).addOnCompleteListener {
+            fireStore.collection(Constants.USERS).document(it).set(newUser).addOnCompleteListener {
 
                 it.addOnSuccessListener {
 
@@ -94,7 +94,7 @@ class ProfileViewModel: ViewModel() {
         newUser?.image = newImageUrl
 
         newUser?.id?.let {
-            fireStore.collection(CollectionsNames.USERS).document(it).set(newUser).addOnCompleteListener {
+            fireStore.collection(Constants.USERS).document(it).set(newUser).addOnCompleteListener {
 
                 it.addOnSuccessListener {
 
@@ -109,7 +109,7 @@ class ProfileViewModel: ViewModel() {
 
     fun uploadNewCurrentUserImage(imageUri: Uri?){
         val storageRef = storage.reference
-        val imageRef = storageRef.child(CollectionsNames.USERSIMAGES)
+        val imageRef = storageRef.child(Constants.USERSIMAGES)
         val fileRef = imageRef.child(currentUser.value?.id!!)
 
 

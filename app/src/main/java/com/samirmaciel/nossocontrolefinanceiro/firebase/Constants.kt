@@ -1,6 +1,6 @@
 package com.samirmaciel.nossocontrolefinanceiro.firebase
 
-object CollectionsNames {
+object Constants {
 
     const val CONTROLS = "CONTROLS"
     const val CONTROLDATA = "CONTROL-DATA"

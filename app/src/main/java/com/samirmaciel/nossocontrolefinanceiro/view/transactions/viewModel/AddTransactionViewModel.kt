@@ -3,7 +3,7 @@ package com.samirmaciel.nossocontrolefinanceiro.view.transactions.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
-import com.samirmaciel.nossocontrolefinanceiro.firebase.CollectionsNames
+import com.samirmaciel.nossocontrolefinanceiro.firebase.Constants
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.CreditCard
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.InstallmentPurchase
@@ -30,7 +30,7 @@ class AddTransactionViewModel : ViewModel() {
     }
 
     private fun loadCreditCards(controlID: String) {
-        val collectionPath = "${CollectionsNames.CONTROLDATA}/${controlID}/CreditCards"
+        val collectionPath = "${Constants.CONTROLDATA}/${controlID}/CreditCards"
 
         fireStore.collection(collectionPath).get()
             .addOnCompleteListener { task ->
