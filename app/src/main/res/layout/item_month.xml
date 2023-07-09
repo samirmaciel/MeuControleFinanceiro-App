@@ -17,6 +17,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/itemMonth_name"
             android:layout_margin="8dp"
             style="@style/title_medium"
             android:layout_weight="1"
@@ -25,6 +26,7 @@
             android:textColor="@color/black"/>
 
         <TextView
+            android:id="@+id/itemMonth_totalValue"
             style="@style/title_medium"
             tools:text="R$200,00"
             android:textSize="12sp"
@@ -32,6 +34,7 @@
             android:textColor="@color/black"/>
 
         <ImageButton
+            android:id="@+id/itemMonth_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
