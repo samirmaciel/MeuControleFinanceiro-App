@@ -3,12 +3,14 @@ package com.samirmaciel.nossocontrolefinanceiro.view.history
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.samirmaciel.nossocontrolefinanceiro.R
 import com.samirmaciel.nossocontrolefinanceiro.model.MonthTransactions
+import com.samirmaciel.nossocontrolefinanceiro.util.LocaleUtils
+import java.text.NumberFormat
+import java.util.Locale
 
 class HistoryAdapter(val onSelect: (MonthTransactions) -> Unit) : RecyclerView.Adapter<HistoryAdapter.MyViewHolder>() {
 
@@ -17,8 +19,11 @@ class HistoryAdapter(val onSelect: (MonthTransactions) -> Unit) : RecyclerView.A
     inner class MyViewHolder(val itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindItem(position: Int){
-            itemView.findViewById<TextView>(R.id.itemMonth_name).text = itemList[position].monthName
-            itemView.findViewById<TextView>(R.id.itemMonth_totalValue).text = itemList[position].totalValue.toString()
+
+            itemView.findViewById<TextView>(R.id.itemMonth_name).text = LocaleUtils.getMonthNameByNumber(itemList[position].month?.toInt(), itemView.resources)
+            itemView.findViewById<TextView>(R.id.itemMonth_totalValue).text = NumberFormat.getCurrencyInstance(
+                Locale.getDefault()).format(itemList[position].totalValue)
+                .toString()
             itemView.findViewById<ImageButton>(R.id.itemMonth_button).setOnClickListener {
                 onSelect(itemList[position])
             }

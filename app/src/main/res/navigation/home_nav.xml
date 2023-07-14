@@ -52,6 +52,16 @@
         <action
             android:id="@+id/action_historyFragment_to_transactionsFragment"
             app:destination="@id/transactionsFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_historyDetailsFragment"
+            app:destination="@id/historyDetailsFragment">
+
+            <argument
+                android:name="month|year"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue=""/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/creditCardDetailFragment"
@@ -67,5 +77,20 @@
             android:id="@+id/action_creditCardDetailFragment_to_creditCardsFragment"
             app:destination="@id/creditCardsFragment" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/historyDetailsFragment"
+        android:name="com.samirmaciel.nossocontrolefinanceiro.view.history.historyDetails.HistoryDetailsFragment"
+        android:label="fragment_history_details"
+        tools:layout="@layout/fragment_history_details" >
+
+        <argument
+            android:name="month|year"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue=""/>
+        <action
+            android:id="@+id/action_historyDetailsFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
     </fragment>
 </navigation>

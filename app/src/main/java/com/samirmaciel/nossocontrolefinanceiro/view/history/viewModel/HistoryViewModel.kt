@@ -1,6 +1,5 @@
 package com.samirmaciel.nossocontrolefinanceiro.view.history.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -12,6 +11,7 @@ import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Filter
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Transaction
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
 import com.samirmaciel.nossocontrolefinanceiro.util.FilterTransactionType
+import java.util.Calendar
 
 class HistoryViewModel : ViewModel() {
 
@@ -48,10 +48,22 @@ class HistoryViewModel : ViewModel() {
 
                         monthsTransactionsList.value = pairYearsMonthsTransactions.second
                         yearsFilterList.value = pairYearsMonthsTransactions.first.map {
-                            Filter(
-                                name = it!!,
-                                filterType = FilterTransactionType.CATEGORY
-                            )
+                            val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+
+                            if(currentYear == it?.toInt()){
+                                Filter(
+                                    name = it!!,
+                                    filterType = FilterTransactionType.CATEGORY,
+                                    isActive = true
+                                )
+                            }else{
+                                Filter(
+                                    name = it!!,
+                                    filterType = FilterTransactionType.CATEGORY,
+                                    isActive = true
+                                )
+                            }
+
                         }
 
                     }
@@ -93,7 +105,7 @@ class HistoryViewModel : ViewModel() {
                 val newMonthTransaction = MonthTransactions()
                 val totalValue = getTotalValueFromTransactions(transactions)
                 newMonthTransaction.transactions = transactions
-                newMonthTransaction.monthName = transactions[0]?.month
+                newMonthTransaction.month = transactions[0]?.month
                 newMonthTransaction.year = map.key
                 newMonthTransaction.totalValue = totalValue
                 monthTransactions.add(newMonthTransaction)

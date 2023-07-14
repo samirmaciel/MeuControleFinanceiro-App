@@ -29,13 +29,21 @@
             android:gravity="center_vertical">
 
             <ImageButton
+                android:id="@+id/historyDetails_backButton"
                 android:layout_marginStart="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_arrow_back_ios_24"
                 android:background="?android:attr/selectableItemBackgroundBorderless"/>
 
+            <ProgressBar
+                android:indeterminateTint="@color/darkBlue"
+                android:id="@+id/historyDetails_progressbar_title"
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
+
             <TextView
+                android:visibility="gone"
                 android:id="@+id/historyDetails_title"
                 style="@style/title_medium"
                 android:layout_marginStart="16dp"
@@ -64,7 +72,16 @@
             android:layout_margin="16dp"
             android:text="@string/title_filter"/>
 
+        <ProgressBar
+            android:id="@+id/historyDetails_progressbar_filters"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:indeterminateTint="@color/darkBlue"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
             android:id="@+id/historyDetails_filter_recyclerview"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="horizontal"
@@ -76,15 +93,31 @@
             android:layout_height="wrap_content"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/historyDetails_transactions_recyclerview"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="16dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/transactions_ll_filter"
         tools:layout_editor_absoluteX="10dp"
-        tools:listitem="@layout/item_transaction" />
+        android:gravity="center">
+
+        <ProgressBar
+            android:id="@+id/historyDetails_progressbar_transactions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/darkBlue"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/historyDetails_transactions_recyclerview"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="16dp"
+            tools:listitem="@layout/item_transaction" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

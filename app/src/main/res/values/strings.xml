@@ -62,6 +62,19 @@
     <string name="title_installment_purchases_placeholder">Sem nenhuma compra parcelada!</string>
 
 
+    <string name="janeiro">Janeiro</string>
+    <string name="fevereiro">Fevereiro</string>
+    <string name="março">Março</string>
+    <string name="abril">Abril</string>
+    <string name="maio">Maio</string>
+    <string name="junho">Junho</string>
+    <string name="julho">Julho</string>
+    <string name="agosto">Agosto</string>
+    <string name="setembro">Setembro</string>
+    <string name="outubro">Outubro</string>
+    <string name="novembro">Novembro</string>
+    <string name="dezembro">Dezembro</string>
+
     <array name="PaymentType">
         <item>Crédito</item>
         <item>Debito</item>
