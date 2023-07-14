@@ -17,9 +17,11 @@ import com.samirmaciel.nossocontrolefinanceiro.databinding.DialogAddCreditCardBi
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.CreditCard
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.InstallmentPurchase
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.User
+import com.samirmaciel.nossocontrolefinanceiro.util.MoneyTextWatcher
 import com.samirmaciel.nossocontrolefinanceiro.view.creditCards.adapter.InstallmentPurchasesAdapter
 import com.samirmaciel.nossocontrolefinanceiro.view.creditCards.viewModel.AddCreditCardViewModel
 import java.util.Date
+import java.util.Locale
 
 class AddCreditCardDialog(val parent: Fragment, val currentUser: User?, val onFinish: (CreditCard) -> Unit) : DialogFragment(R.layout.dialog_add_credit_card), AdapterView.OnItemSelectedListener{
 
@@ -40,6 +42,11 @@ class AddCreditCardDialog(val parent: Fragment, val currentUser: User?, val onFi
     }
 
     private fun setListeners() {
+
+        binding?.addCreditCardCashPurchasesValueInput?.addTextChangedListener(MoneyTextWatcher(binding?.addCreditCardCashPurchasesValueInput!!, Locale.getDefault()))
+        binding?.addCreditCardLimitAvailableValueInput?.addTextChangedListener(MoneyTextWatcher(binding?.addCreditCardLimitAvailableValueInput!!, Locale.getDefault()))
+        binding?.addCreditCardLimitTotalValueInput?.addTextChangedListener(MoneyTextWatcher(binding?.addCreditCardLimitTotalValueInput!!, Locale.getDefault()))
+
         binding?.addCreditCardAddCashPurchasesButton?.setOnClickListener {
             if(validateInstallmentPurchasesField()){
                 viewModel?.addInstallmentPurchase(getInstallmentPurchase())

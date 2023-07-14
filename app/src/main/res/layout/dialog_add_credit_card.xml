@@ -71,6 +71,7 @@
 
                 <EditText
                     android:id="@+id/addCreditCard_limit_total_value_input"
+                    android:inputType="number"
                     android:layout_marginEnd="8dp"
                     android:layout_width="wrap_content"
                     android:hint="@string/hint_money_value"
@@ -104,6 +105,7 @@
 
                 <EditText
                     android:id="@+id/addCreditCard_limit_available_value_input"
+                    android:inputType="number"
                     android:layout_marginEnd="8dp"
                     android:layout_width="wrap_content"
                     android:hint="@string/hint_money_value"
@@ -204,6 +206,7 @@
 
                     <EditText
                         android:id="@+id/addCreditCard_cashPurchases_value_input"
+                        android:inputType="number"
                         android:layout_marginEnd="8dp"
                         android:layout_width="wrap_content"
                         android:hint="@string/hint_money_value"

@@ -16,6 +16,7 @@ import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Control
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.CreditCard
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.InstallmentPurchase
 import com.samirmaciel.nossocontrolefinanceiro.model.firebase.Transaction
+import com.samirmaciel.nossocontrolefinanceiro.util.MoneyTextWatcher
 import com.samirmaciel.nossocontrolefinanceiro.view.transactions.viewModel.AddTransactionViewModel
 import java.text.FieldPosition
 import java.text.SimpleDateFormat
@@ -46,6 +47,9 @@ class AddTransactionDialog(val control: Control?, val onFinish: (Transaction?, I
     }
 
     private fun setListeners() {
+
+        binding?.addTransactionValue?.addTextChangedListener(MoneyTextWatcher(binding?.addTransactionValue!!, Locale.getDefault()))
+        binding?.addTransactionInstallmentPurchasesValueInput?.addTextChangedListener(MoneyTextWatcher(binding?.addTransactionInstallmentPurchasesValueInput!!, Locale.getDefault()))
         binding?.addTransactionConfirmButton?.setOnClickListener {
 
             if(validateFields()){
